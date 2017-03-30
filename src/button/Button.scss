@@ -1,0 +1,10 @@
+$font-size: 14px;
+
+.button {
+  background-color: #aaa;
+  font-size: $font-size;
+
+  &:hover {
+    font-size: $font-size * 1.1;
+  }
+}

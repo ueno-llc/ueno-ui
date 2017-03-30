@@ -62,11 +62,14 @@ function webpackConfigFactory({ target }) {
           include: [resolvePath(appRootDir.get(), './src')],
         },
         {
-          test: /\.css$/,
+          test: /\.css|\.scss|\.sass$/,
           use: [
             ...ExtractTextPlugin.extract({
               fallback: 'style-loader',
-              use: 'css-loader?modules=1',
+              use: [
+                'css-loader?modules=1&localIdentName=[hash:base64:16]',
+                'sass-loader?outputStyle=expanded',
+              ],
             }),
           ],
         },

@@ -11,6 +11,14 @@
         "react",
         "stage-1"
       ],
+      "plugins": [
+        ["css-modules-transform", {
+          "extractCss": "./styles.css",
+          "extensions": [".css", ".scss", ".sass"],
+          "preprocessCss": "./tools/scripts/sass.js",
+          "generateScopedName": "[hash:base64:16]"
+        }]
+      ]
     },
     "umd": {
       "presets": [

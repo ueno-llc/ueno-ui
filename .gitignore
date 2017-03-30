@@ -15,6 +15,7 @@ coverage
 umd
 commonjs
 build
+styles.css
 
 # Flow
 flow-coverage
