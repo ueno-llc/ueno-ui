@@ -1,10 +1,52 @@
-$font-size: 14px;
+@import '../styles/config';
 
 .button {
-  background-color: #aaa;
-  font-size: $font-size;
+  @include reset-button();
+
+  display: inline-block;
+
+  padding: .78571429em 1.5em;
+  margin: 0 .25em 0 0;
+
+  min-height: 1em;
+  vertical-align: baseline;
+
+  font-family: Lato, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 1rem;
+
+  color: rgba(0, 0, 0, .6);
+
+  line-height: 1em;
+
+  text-transform: none;
+  text-shadow: none;
+  text-align: center;
+  text-decoration: none;
+
+  user-select: none;
+  cursor: pointer;
+
+  background: #E0E1E2;
+  border-radius: .28571429rem;
+
+  border: 0;
+  outline: 0;
+
+  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
+
+  transition: 100ms ease;
+  transition-property: background, color, box-shadow;
+
+  -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    font-size: $font-size * 1.1;
+    color: rgba(0,0,0,.8);
+
+    background-color: #CACBCD;
+    background-image: none;
+
+    box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34,36,38,.15) inset;
   }
 }
