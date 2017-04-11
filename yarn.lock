@@ -1819,6 +1819,10 @@ console-control-strings@^1.0.0, console-control-strings@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
 
+consolidated-events@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/consolidated-events/-/consolidated-events-1.0.1.tgz#70f475f4a5d6d20428e702da1b8870d9cc031a14"
+
 constants-browserify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
@@ -2062,6 +2066,12 @@ css-tokenize@^1.0.1:
     inherits "^2.0.1"
     readable-stream "^1.0.33"
 
+css-tree@1.0.0-alpha17:
+  version "1.0.0-alpha17"
+  resolved "https://registry.yarnpkg.com/css-tree/-/css-tree-1.0.0-alpha17.tgz#7ab95ab72c533917af8be54313fec81841c5223a"
+  dependencies:
+    source-map "^0.5.3"
+
 css-what@2.1:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.0.tgz#9467d032c38cfaefb9f2d79501253062f87fa1bd"
@@ -2113,6 +2123,12 @@ csso@~2.3.1:
   dependencies:
     clap "^1.0.9"
     source-map "^0.5.3"
+
+csso@~3.0.0:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/csso/-/csso-3.0.1.tgz#1469af5ee2ec509addadd8777aa0e45acb6b2f58"
+  dependencies:
+    css-tree "1.0.0-alpha17"
 
 cssom@0.3.x, "cssom@>= 0.3.2 < 0.4.0":
   version "0.3.2"
@@ -2862,6 +2878,12 @@ file-entry-cache@^2.0.0:
   dependencies:
     flat-cache "^1.2.1"
     object-assign "^4.0.1"
+
+file-loader@^0.11.1:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/file-loader/-/file-loader-0.11.1.tgz#6b328ee1234a729e4e47d36375dd6d35c0e1db84"
+  dependencies:
+    loader-utils "^1.0.2"
 
 file-loader@^0.9.0:
   version "0.9.0"
@@ -5224,6 +5246,13 @@ postcss-convert-values@^2.3.4:
     postcss "^5.0.11"
     postcss-value-parser "^3.1.2"
 
+postcss-csso@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/postcss-csso/-/postcss-csso-2.0.0.tgz#43c995e0dec54b44e846752de1a435e97f0eb1cd"
+  dependencies:
+    csso "~3.0.0"
+    postcss "^5.0.0"
+
 postcss-discard-comments@^2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/postcss-discard-comments/-/postcss-discard-comments-2.0.4.tgz#befe89fafd5b3dace5ccce51b76b81514be00e3d"
@@ -5751,6 +5780,12 @@ react-stubber@^1.0.0:
   resolved "https://registry.yarnpkg.com/react-stubber/-/react-stubber-1.0.0.tgz#41ee2cac72d4d4fd70a63896da98e13739b84628"
   dependencies:
     babel-runtime "^6.5.0"
+
+react-waypoint@^5.2.1:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-5.2.1.tgz#0c5e13600df5e59c0e1abc29a527054ce3db6909"
+  dependencies:
+    consolidated-events "^1.0.1"
 
 react@15.4.2:
   version "15.4.2"
@@ -6809,7 +6844,7 @@ unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"
 
-url-loader@^0.5.7:
+url-loader@^0.5.7, url-loader@^0.5.8:
   version "0.5.8"
   resolved "https://registry.yarnpkg.com/url-loader/-/url-loader-0.5.8.tgz#b9183b1801e0f847718673673040bc9dc1c715c5"
   dependencies:

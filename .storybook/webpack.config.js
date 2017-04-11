@@ -10,6 +10,7 @@ module.exports = {
   plugins: [
     // your custom plugins
   ],
+
   module: {
     loaders: [
       // add your custom loaders.
@@ -20,6 +21,10 @@ module.exports = {
           'css-loader?modules=1&localIdentName=[hash:base64:16]',
           'sass-loader?outputStyle=expanded',
         ],
+      },
+      {
+        test: /\.(woff2?|svg|eot|jpe?g|png|gif|ico)$/,
+        loader: 'url?limit=10000',
       },
     ],
   },

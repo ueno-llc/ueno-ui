@@ -18,9 +18,9 @@
     "ui components"
   ],
   "scripts": {
-    "build": "babel-node ./tools/scripts/build.js",
+    "build": "yarn clear && babel-node ./tools/scripts/build.js",
     "check": "yarn run test",
-    "clean": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./umd",
+    "clear": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./umd && rimraf ./styles.css",
     "lint": "eslint src && stylelint \"src/**/*.scss\" --syntax scss",
     "precommit": "lint-staged && npm run test",
     "prepublish": "yarn run build",
@@ -76,6 +76,7 @@
     "eslint-plugin-jsx-a11y": "4.0.0",
     "eslint-plugin-react": "6.10.3",
     "extract-text-webpack-plugin": "2.1.0",
+    "file-loader": "^0.11.1",
     "gzip-size": "3.0.0",
     "husky": "0.13.3",
     "identity-obj-proxy": "3.0.0",
@@ -98,11 +99,13 @@
     "stylelint": "7.9.0",
     "stylelint-order": "0.4.3",
     "stylelint-scss": "1.4.3",
+    "url-loader": "^0.5.8",
     "webpack": "2.3.2",
     "webpack-dev-middleware": "1.10.1",
     "webpack-hot-middleware": "2.17.1"
   },
   "dependencies": {
-    "css-modules-require-hook": "^4.0.6"
+    "css-modules-require-hook": "^4.0.6",
+    "react-waypoint": "^5.2.1"
   }
 }

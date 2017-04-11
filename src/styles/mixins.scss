@@ -1,0 +1,354 @@
+@mixin fit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  margin: auto;
+
+  width: 100%;
+  min-height: 340px;
+
+  text-align: center;
+
+  background-color: $color-background-gray;
+
+  overflow: hidden;
+
+  @media (min-width: $min-mobile) {
+    min-height: 500px;
+  }
+
+  @media (min-width: $min-desktop) {
+    min-height: 840px;
+  }
+}
+
+@mixin font-size($size) {
+  font-size: $size * 0.6;
+
+  @media (min-width: $min-480) {
+    font-size: $size * 0.7;
+  }
+
+  @media (min-width: $min-768) {
+    font-size: $size * 0.8;
+  }
+
+  @media (min-width: $min-1200) {
+    font-size: $size;
+  }
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function lock($min-size, $size, $limit) {
+  $baseline: 375px;
+
+  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
+
+  @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
+}
+
+// defaults to standard heading size
+@mixin responsive-font($min-size: 23, $size: 36, $limit: 1200px) {
+  $baseline: 375px;
+  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
+
+  font-size: #{$min-size}px;
+
+  @media (min-width: $baseline) {
+    font-size: #{$min-size}px;
+    font-size: lock($min-size, $size, $limit);
+  }
+
+  @media (min-width: $limit) {
+    font-size: #{$size}px;
+  }
+}
+
+@mixin viewport($media) {
+  @if $media == handset {
+    @media only screen and (max-width: $max-tablet) { @content; }
+  }
+
+  @else if $media == tablet {
+    @media only screen and (min-width: $min-tablet) { @content; }
+  }
+
+  @else if $media == desktop {
+    @media only screen and (min-width: $min-desktop) { @content; }
+  }
+
+  /* stylelint-disable */
+  @else if $media == retina {
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+      only screen and (-o-min-device-pixel-ratio: 13/10),
+      only screen and (min-resolution: 120dpi) {
+      @content;
+    }
+  }
+
+  @else if $media == oldIE {
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      @content;
+    }
+  }
+}
+
+// should be used only for Segment component; use 'section' for section spacing
+@mixin segment() {
+  position: relative;
+
+  padding: $segment-gutter-mobile 0 ($segment-gutter-mobile - $gutter);
+
+  @media (min-width: $min-tablet) {
+    padding: $segment-gutter-tablet 0 ($segment-gutter-tablet - $gutter);
+  }
+
+  @media (min-width: $min-desktop) {
+    padding: $segment-gutter-desktop 0 ($segment-gutter-desktop - $gutter);
+  }
+
+  @media (min-width: $min-1440) {
+    padding: ($segment-gutter-desktop * 1.75) 0 ($segment-gutter-desktop * 1.75 - $gutter);
+  }
+}
+
+@mixin container() {
+  margin: 0 auto;
+
+  padding-left: $container-gutter-mobile;
+  padding-right: $container-gutter-mobile;
+  max-width: $page-width + $container-gutter-mobile * 1;
+
+  @media (min-width: $min-340) {
+    max-width: $page-width + $container-gutter-mobile * 2;
+  }
+
+  @media (min-width: $min-tablet) {
+    padding-left: $container-gutter-tablet;
+    padding-right: $container-gutter-tablet;
+    max-width: $page-width + $container-gutter-tablet * 2;
+  }
+
+  @media (min-width: $min-desktop) {
+    padding-left: $container-gutter-desktop;
+    padding-right: $container-gutter-desktop;
+    max-width: $page-width + $container-gutter-desktop * 2;
+  }
+}
+
+// generic padding for each section based on PSD styles
+@mixin section {
+  padding-top: $gutter * 3;
+  padding-bottom: $gutter * 3;
+
+  @media (min-width: $min-tablet) {
+    padding-top: percentage(200px / $limit);
+    padding-bottom: percentage(200px / $limit);
+  }
+
+  @media (min-width: $limit) {
+    padding-top: 200px;
+    padding-bottom: 200px;
+  }
+}
+
+// Placeholder
+@mixin placeholder($color) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+
+  &:-moz-placeholder {
+    color: $color;
+  }
+
+  &::-moz-placeholder {
+    color: $color;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color;
+  }
+}
+
+// Offseting hero image
+@mixin heroImage($direction: left, $heroOffset: 190px, $scale: false) {
+  @if $direction == right {
+    margin-right: -$gutter;
+
+    @media (min-width: $min-tablet) {
+      margin-right: -$container-gutter-tablet;
+    }
+
+    @media (min-width: $min-desktop) {
+      margin-right: -$container-gutter-desktop;
+    }
+
+    @media (min-width: $page-width + $heroOffset - 50px ) {
+      margin-right: calc((100vw - #{$page-width}) / -2);
+    }
+
+    @if $scale == false {
+      @media (min-width: 1670px) {
+        margin-right: -$heroOffset;
+      }
+    }
+  }
+
+  @else if $direction == left {
+    margin-left: -$gutter;
+
+    @media (min-width: $min-tablet) {
+      margin-left: -$container-gutter-tablet;
+    }
+
+    @media (min-width: $min-desktop) {
+      margin-left: -$container-gutter-desktop;
+    }
+
+    @media (min-width: $page-width + $heroOffset - 50px) {
+      margin-left: calc((100vw - #{$page-width}) / -2);
+    }
+
+    @if $scale == false {
+      @media (min-width: 1670px) {
+        margin-left: -$heroOffset;
+      }
+    }
+  }
+}
+
+// Form element styling
+@mixin formElement {
+  @include reset-input;
+  @include placeholder(#4b4d53);
+
+  display: block;
+  position: relative;
+  z-index: 2;
+
+  margin-bottom: $gutter;
+  width: 100%;
+  height: 40px;
+
+  color: #4b4d53;
+
+  border: 0;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(144, 158, 167, 0.5);
+  border-radius: 0;
+
+  .form__sent &:invalid {
+    box-shadow: 0 0 0 1px #f00;
+  }
+
+  &:active,
+  &:focus {
+    @include placeholder(transparent);
+    border-bottom: 1px solid rgba(144, 158, 167, 0.9);
+    outline: none;
+  }
+
+  &:required {
+    box-shadow: none;
+  }
+
+  &:invalid {
+    box-shadow: none;
+  }
+}
+
+@mixin heading($min: 25, $max: 52) {
+  @include reset-heading;
+  @include responsive-font($min, $max);
+
+  margin-bottom: (5/52)*1em;
+
+  font-family: $font-family-heading;
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  line-height: (58/52);
+
+  color: #000;
+}
+
+@mixin subheading($min: 25, $max: 52) {
+  @include reset-heading;
+  @include responsive-font($min, $max);
+
+  font-family: $font-family-heading;
+  font-weight: 100;
+  letter-spacing: -0.035em;
+  line-height: (58/52);
+
+  color: $font-color-subheading;
+}
+
+@mixin copy($min: 15, $max: 18) {
+  @include reset-all;
+  @include responsive-font($min,$max);
+
+  color: $font-color-content;
+  letter-spacing: 0.025em;
+  line-height: (28/18);
+  font-weight: 200;
+}
+
+@mixin border($position: top) {
+  position: relative;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    left: $container-gutter-mobile / 2;
+    right: $container-gutter-mobile / 2;
+
+    @if $position == 'bottom' {
+      bottom: 0;
+    }
+    @else {
+      top: 0;
+    }
+
+    margin: auto;
+
+    max-width: $page-width;
+    height: 1px;
+    background: $color-border;
+
+    @media (min-width: $min-340) {
+      left: $container-gutter-mobile;
+      right: $container-gutter-mobile;
+    }
+
+    @media (min-width: $min-tablet) {
+      left: $container-gutter-tablet;
+      right: $container-gutter-tablet;
+    }
+
+    @media (min-width: $min-desktop) {
+      left: $container-gutter-desktop;
+      right: $container-gutter-desktop;
+    }
+  }
+}
