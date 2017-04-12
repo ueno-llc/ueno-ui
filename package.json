@@ -23,7 +23,7 @@
     "clear": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./styles.css",
     "lint": "eslint src && stylelint \"src/**/*.scss\" --syntax scss",
     "precommit": "lint-staged && npm run test",
-    "prepublish": "yarn run build",
+    "prepublish": "NODE_ENV=production yarn run build",
     "test": "jest",
     "test:coverage": "yarn run test -- --coverage",
     "test:coverage:deploy": "yarn run test:coverage && codecov",
