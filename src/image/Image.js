@@ -1,71 +1,97 @@
 import React, { Component, PropTypes } from 'react';
-
+import Waypoint from 'react-waypoint';
+import classNames from 'classnames';
+import { canUseDOM } from '../utils';
 import s from './Image.scss';
 
-export default class Item extends Component {
+export default class Image extends Component {
   static propTypes = {
-    src: PropTypes.string,
-    src2x: PropTypes.string,
+    src: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        src: PropTypes.string,
+        src2x: PropTypes.string,
+        src3x: PropTypes.string,
+        src4x: PropTypes.string,
+      }),
+    ]).isRequired,
     alt: PropTypes.string,
     className: PropTypes.string,
-    width: PropTypes.number,
-    height: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     background: PropTypes.string,
     progressive: PropTypes.bool,
+    lazy: PropTypes.bool,
+    scrollableAncestor: PropTypes.object, // eslint-disable-line
   };
 
   static defaultProps = {
-    src: '',
-    src2x: '',
     alt: '',
     className: '',
     progressive: false,
+    scrollableAncestor: canUseDOM ? window : undefined,
   };
 
-  state = {};
-
-  componentDidMount() {
-    if (this.img.complete) {
-      this.wrapper.classList.add(s({ hasLoaded: true }));
-    }
-  }
-
-  makeSrc(src = '', src2x = '') {
-    if (src === '') {
-      return src2x;
-    }
-
-    return src;
-  }
-
-  makeSrcSet(src = '', src2x = '') {
-    if (src2x !== '') {
-      return `${src} 1x, ${src2x} 2x`;
-    }
-
-    return undefined;
-  }
-
-  loaded = () => {
-    this.setState({
-      loaded: true,
-    });
+  state = {
+    loaded: false,
+    visible: false,
   };
 
-  render() {
+  makeSrc = (src) => {
+    if (typeof src === 'string') {
+      return src;
+    }
+    return src.src;
+  };
+
+  makeSrcSet = (src) => {
+    if (typeof src === 'string') {
+      return undefined;
+    }
+    return Object.keys(src)
+      .map((k) => {
+        const size = k.slice(3) || '1x';
+        return `${src[k]} ${size}`;
+      })
+      .join(', ');
+  };
+
+  onLoad = () => this.setState({ loaded: true });
+  onEnter = () => this.setState({ visible: true });
+
+  renderImg = () => {
+    const { lazy } = this.props;
+    const { visible } = this.state;
+    if (lazy && !visible) {
+      return null;
+    }
+
     const {
       src,
-      src2x,
       alt,
-      className,
       width,
       height,
-      background,
-      progressive,
     } = this.props;
 
-    const { loaded = false } = this.state;
+    const hasPlaceholder = Boolean(width && height);
+    return (
+      <img
+        src={this.makeSrc(src)}
+        srcSet={this.makeSrcSet(src)}
+        alt={alt}
+        role={alt === '' ? 'presentation' : undefined}
+        className={classNames(s.image, {
+          hasPlaceholder,
+        })}
+        onLoad={this.onLoad}
+        width={width}
+        height={height}
+      />
+    );
+  };
 
+  renderInner = () => {
+    const { width, height, background } = this.props;
     const hasPlaceholder = Boolean(width && height);
     const paddingStyles = hasPlaceholder
       ? { paddingBottom: `${height / width * 100}%` }
@@ -75,38 +101,51 @@ export default class Item extends Component {
       paddingStyles.backgroundColor = background;
     }
 
-    const img = (
-      <img
-        src={this.makeSrc(src, src2x)}
-        srcSet={this.makeSrcSet(src, src2x)}
-        alt={alt}
-        role={alt === '' ? 'presentation' : undefined}
-        className={s(s.image, {
-          hasPlaceholder,
-        })}
-        onLoad={hasPlaceholder ? this.loaded : undefined}
-        width={width}
-        height={height}
-        ref={el => this.img = el}
-      />
-    );
+    if (hasPlaceholder) {
+      return (
+        <div>
+          <div className={s.content}>
+            {this.renderImg()}
+          </div>
+          <div className={s.padding} style={paddingStyles} />
+        </div>
+      );
+    }
 
-    return hasPlaceholder
-      ? <div
-        className={s(s.wrapper, className, {
-          fadeIn: hasPlaceholder && !progressive,
-          hasLoaded: hasPlaceholder && loaded,
+    return this.renderImg();
+  };
+
+  render() {
+    const {
+      className,
+      width,
+      height,
+      progressive,
+      lazy,
+      scrollableAncestor,
+    } = this.props;
+
+    const { loaded, visible } = this.state;
+
+    const hasPlaceholder = Boolean(width && height);
+
+    return (
+      <div
+        className={classNames(s.wrapper, className, {
+          fadeIn: (hasPlaceholder || lazy) && !progressive,
+          hasLoaded: loaded,
         })}
         ref={el => this.wrapper = el}
-        style={{ width: width || 'auto' }}
+        style={{ width: +width || 'auto' }}
       >
-        <div className={s.content}>
-          {img}
-        </div>
-        <div className={s.padding} style={paddingStyles} />
+        {lazy &&
+          !visible &&
+          <Waypoint
+            scrollableAncestor={scrollableAncestor}
+            onEnter={this.onEnter}
+          />}
+        {this.renderInner()}
       </div>
-      : <div className={s(s.wrapper, className)} ref={el => this.wrapper = el}>
-        {img}
-      </div>;
+    );
   }
 }

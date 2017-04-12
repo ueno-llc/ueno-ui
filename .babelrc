@@ -20,6 +20,21 @@
         }]
       ]
     },
+    "commonjs-dev": {
+      "presets": [
+        "latest",
+        "react",
+        "stage-1"
+      ],
+      "plugins": [
+        ["css-modules-transform", {
+          "extractCss": "./styles.css",
+          "extensions": [".css", ".scss", ".sass"],
+          "preprocessCss": "./tools/scripts/sass.js",
+          "generateScopedName": "[name]_[local]_[hash:base64:5]"
+        }]
+      ]
+    },
     "umd": {
       "presets": [
         ["latest", { "es2015": { "modules": false } }],

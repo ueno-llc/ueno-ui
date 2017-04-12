@@ -13,8 +13,10 @@ const nodeEnv = Object.assign({}, process.env, {
   NODE_ENV: 'production',
 });
 
+const isDev = process.env.NODE_ENV === 'development';
+
 exec(
-  'cross-env BABEL_ENV=commonjs babel --ignore **/__tests__ ./src -d ./commonjs',
+  `cross-env BABEL_ENV=${isDev ? 'commonjs-dev' : 'commonjs'} babel --ignore **/__tests__ ./src -d ./commonjs`,
 );
 
 exec(

@@ -5,7 +5,6 @@
   display: inline-block;
 
   padding: 0;
-  margin-bottom: 45px;
 
   min-width: 100%;
 
@@ -24,10 +23,6 @@
     outline: none;
   }
 
-  @media (min-width: $min-768) {
-    margin-bottom: 100px;
-  }
-
   &__imageWrap {
     padding-bottom: $gutter;
 
@@ -39,22 +34,13 @@
     transition: transform 300ms ease-in-out;
   }
 
-  &:hover &__scale {
-    @media (min-width: $min-desktop) {
-      transform: scale(0.97);
-    }
+  &.isDone &__scale {
+    transition: transform 300ms ease-in-out;
   }
 
-  &__zero {
-    display: flex;
-    min-height: 340px;
-
-    @media (min-width: $min-mobile) {
-      min-height: 500px;
-    }
-
+  &.isDone:hover &__scale {
     @media (min-width: $min-desktop) {
-      min-height: 840px;
+      transform: scale(0.97);
     }
   }
 
@@ -70,77 +56,13 @@
     transform: scale(1);
   }
 
-  &__assets > * {
+  &.isDone &__assets > * {
     transition: transform 300ms ease-in-out;
   }
 
-  &:hover &__assets > * {
+  &.isDone:hover &__assets > * {
     @media (min-width: $min-desktop) {
       transform: scale(1.1);
-    }
-  }
-
-  &__zeroCard {
-    left: -25%;
-
-    width: 175px;
-    height: 175px;
-
-    @media (min-width: $min-mobile) {
-      top: 5%;
-
-      width: 225px;
-      height: 225px;
-    }
-
-    @media (min-width: $min-540) {
-      width: 275px;
-      height: 275px;
-    }
-
-    @media (min-width: $min-tablet) {
-      left: -15%;
-
-      width: 300px;
-      height: 300px;
-    }
-
-    @media (min-width: $min-desktop) {
-      top: 2%;
-
-      width: 450px;
-      height: 450px;
-    }
-  }
-
-  &__zeroPhone {
-    right: -40%;
-
-    width: 250px;
-    height: 250px;
-
-    @media (min-width: $min-mobile) {
-      width: 325px;
-      height: 325px;
-    }
-
-    @media (min-width: $min-540) {
-      width: 375px;
-      height: 375px;
-    }
-
-    @media (min-width: $min-tablet) {
-      right: -25%;
-
-      width: 400px;
-      height: 400px;
-    }
-
-    @media (min-width: $min-desktop) {
-      right: -20%;
-
-      width: 600px;
-      height: 600px;
     }
   }
 
