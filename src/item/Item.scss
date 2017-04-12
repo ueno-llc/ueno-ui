@@ -24,7 +24,11 @@
   }
 
   &__imageWrap {
-    padding-bottom: $gutter;
+    padding-bottom: $gutter / 2;
+
+    @media (min-width: $min-tablet) {
+      padding-bottom: $gutter;
+    }
 
     pointer-events: auto;
   }
@@ -90,11 +94,15 @@
   &__typelist {
     @include reset-list;
 
-    display: inline-flex;
+    display: none;
     justify-content: center;
     flex-wrap: wrap;
 
     padding: 0 $gutter / 2;
+    
+    @media (min-width: $min-tablet) {
+      display: inline-flex;
+    }
   }
 
   &__type {
