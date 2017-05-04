@@ -8,7 +8,8 @@
     "*.md",
     "styles.css",
     "umd",
-    "commonjs"
+    "commonjs",
+    "src"
   ],
   "repository": "git@github.com:ueno-llc/ueno-ui.git",
   "author": "Birkir Gudjonsson <birkir.gudjonsson@gmail.com>",
