@@ -1,0 +1,35 @@
+@import '../styles/config';
+
+.field {
+  position: relative;
+  width: 100%;
+
+  &__label {
+    @include responsive-font(11, 12);
+
+    display: block;
+    position: relative;
+    opacity: 0;
+
+    text-transform: uppercase;
+    color: $color-label;
+  }
+
+  &__select {
+    @include formElement;
+  }
+
+  &__error {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 14px;
+    font-family: $font-family-akagi;
+    color: $color-error;
+  }
+}

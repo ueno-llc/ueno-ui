@@ -94,7 +94,7 @@ export default class Image extends Component {
     const { width, height, background } = this.props;
     const hasPlaceholder = Boolean(width && height);
     const paddingStyles = hasPlaceholder
-      ? { paddingBottom: `${height / width * 100}%` }
+      ? { paddingBottom: `${height / width * 100}%` } // eslint-disable-line
       : undefined;
 
     if (hasPlaceholder && background) {
@@ -135,7 +135,9 @@ export default class Image extends Component {
           fadeIn: (hasPlaceholder || lazy) && !progressive,
           hasLoaded: loaded,
         })}
-        ref={el => this.wrapper = el}
+        ref={(el) => {
+          this.wrapper = el;
+        }}
         style={{ width: +width || 'auto' }}
       >
         {lazy &&

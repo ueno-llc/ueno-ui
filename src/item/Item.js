@@ -84,7 +84,9 @@ export default class Item extends Component {
     return (
       <a
         href={link}
-        ref={el => this.hostEl = el}
+        ref={(el) => {
+          this.hostEl = el;
+        }}
         className={s.item}
         target={isExternal ? '_blank' : null}
         rel={isExternal ? 'noopener' : null}

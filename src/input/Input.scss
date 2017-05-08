@@ -1,0 +1,9 @@
+@import '../styles/config';
+
+.input {
+  @include formElement;
+}
+
+.error:not(:focus) {
+  border-color: $color-error;
+}

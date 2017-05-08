@@ -1,0 +1,125 @@
+@import '../styles/config';
+
+$btn-height: 22px;
+
+.button {
+  @include reset-button();
+
+  display: inline-flex;
+  flex-flow: nowrap row;
+  align-items: center;
+
+  position: relative;
+
+  padding: 1em;
+  margin: -1em;
+
+  font-size: $font-size - 2;
+  line-height: $btn-height;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+
+  cursor: pointer;
+  overflow: visible;
+
+  // fix for firefox
+  &__flex {
+    display: inline-flex;
+    flex-flow: nowrap row;
+    align-items: center;
+  }
+
+  &.white {
+    color: #fff;
+  }
+
+  &.arrow &__arrowRight {
+    display: inline-block;
+    margin-right: 10px;
+    // margin-top: auto;
+    // margin-bottom: auto;
+    margin-bottom: 2px;
+    width: 6px;
+    height: 10px;
+
+    // background: #ccc;
+
+    &.arrowBack {
+      transform: rotate(180deg);
+    }
+
+    path { // stylelint-disable-line
+      fill: currentColor;
+    }
+  }
+
+  &__arrowSubmit {
+    display: inline-block;
+    margin-right: 18px;
+    margin-bottom: 3px;
+    width: 14px;
+    height: 11px;
+
+    path { // stylelint-disable-line
+      fill: currentColor;
+    }
+  }
+
+  &__content {
+    display: block;
+    position: relative;
+    padding-left: 0;
+    padding-right: 25px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    overflow: hidden;
+  }
+
+  &__text {
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+
+  &__overlay {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(0, 0, 0, 0.1);
+
+    transform: translateX(-103%);
+  }
+
+  & + & {
+    margin-left: $gutter / 2;
+  }
+
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+
+  &:disabled {
+    background: #bbb;
+  }
+}
+
+.formBtn span { // stylelint-disable-line
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
+.button.semiBold span{ // stylelint-disable-line
+  font-weight: 600;
+}

@@ -1,6 +1,14 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
-import { Button, Item, Image } from '../src';
+import {
+  Button,
+  Item,
+  Image,
+  Field,
+  Input,
+  Textarea,
+  UenoButton,
+} from '../src';
 
 storiesOf('Button', module)
   .add('with text', () => (
@@ -8,6 +16,14 @@ storiesOf('Button', module)
   ))
   .add('with some emoji', () => (
     <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
+  ));
+
+storiesOf('Ueno Button', module)
+  .add('with text', () => (
+    <UenoButton onClick={action('clicked')}>Hello Button</UenoButton>
+  ))
+  .add('submit', () => (
+    <UenoButton submit onClick={action('clicked')}>Submit</UenoButton>
   ));
 
 storiesOf('Item', module).add('with image', () => (
@@ -58,4 +74,26 @@ storiesOf('Image', module)
         height="512"
       />
     </div>
+  ));
+
+storiesOf('Form', module)
+  .add('input', () => (
+    <Field label="Name" name="name">
+      <Input type="text" />
+    </Field>
+  ))
+  .add('input with error', () => (
+    <Field label="Name" name="name" error="Name missing">
+      <Input type="text" hasError />
+    </Field>
+  ))
+  .add('textarea', () => (
+    <Field label="Text" name="text">
+      <Textarea />
+    </Field>
+  ))
+  .add('textarea with error', () => (
+    <Field label="Text" name="text" error="Text missing">
+      <Textarea hasError error />
+    </Field>
   ));

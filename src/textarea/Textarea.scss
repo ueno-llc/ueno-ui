@@ -1,0 +1,13 @@
+@import '../styles/config';
+
+.textarea {
+  @include formElement;
+
+  height: 180px;
+
+  resize: none;
+}
+
+.error:not(:focus) {
+  border-color: $color-error;
+}

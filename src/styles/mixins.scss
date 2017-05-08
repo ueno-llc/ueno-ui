@@ -313,6 +313,17 @@
   font-weight: 200;
 }
 
+@mixin anchor($min: 14, $max: 14) {
+  @include reset-anchor;
+  @include responsive-font($min,$max);
+
+  color: $font-color-dark;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
+  line-height: (20/14);
+  font-weight: 700;
+}
+
 @mixin border($position: top) {
   position: relative;
 

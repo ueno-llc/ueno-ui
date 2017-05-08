@@ -109,6 +109,8 @@
     "webpack-hot-middleware": "2.17.1"
   },
   "dependencies": {
-    "css-modules-require-hook": "^4.0.6"
+    "css-modules-require-hook": "^4.0.6",
+    "gsap": "^1.19.1",
+    "react-router-dom": "^4.1.1"
   }
 }
