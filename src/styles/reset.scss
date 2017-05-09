@@ -27,6 +27,7 @@
 
   border-radius: 0;
   background: transparent;
+  -webkit-appearance: none;
   appearance: none;
 
   &:focus {
@@ -38,6 +39,7 @@
   @include reset-all;
 
   border-radius: 0;
+  -webkit-appearance: none;
   appearance: none;
 
   &:focus {

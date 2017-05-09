@@ -1,0 +1,47 @@
+@import '../styles/config';
+
+.checkbox {
+  position: relative;
+
+  margin-bottom: $gutter;
+
+  color: inherit;
+  border-color: inherit;
+
+  &__label {
+    color: inherit;
+    user-select: none;
+    border-color: inherit;
+  }
+
+  &__input {
+    @include reset-input;
+    display: none;
+  }
+
+  &__vue {
+    display: inline-block;
+    position: relative;
+    margin-right: 1.1em;
+    width: 1em;
+    height: 1em;
+    vertical-align: -10%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: inherit;
+  }
+
+  &__input:checked + &__vue::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 37.5%;
+    height: 37.5%;
+    text-align: center;
+    background-color: #000;
+  }
+}

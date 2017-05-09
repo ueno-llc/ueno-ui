@@ -6,6 +6,7 @@ import {
   Image,
   Field,
   Input,
+  Checkbox,
   Textarea,
   UenoButton,
 } from '../src';
@@ -104,4 +105,5 @@ storiesOf('Form', module)
     <Field label="Text" name="text" error="Text missing">
       <Textarea hasError error />
     </Field>
-  ));
+  ))
+  .add('checkbox', () => <Checkbox name="checkbox" label="checkbox" />);
