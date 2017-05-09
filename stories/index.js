@@ -26,18 +26,26 @@ storiesOf('Ueno Button', module)
     <UenoButton submit onClick={action('clicked')}>Submit</UenoButton>
   ));
 
-storiesOf('Item', module).add('with image', () => (
-  <div>
-    <div style={{ marginBottom: '1000px' }}>
-      Scroll Down
-    </div>
-    <div style={{ width: '600px' }}>
-      <Item name="Test" link="" tags={['Ueno is Cool']}>
+storiesOf('Item', module)
+  .add('with hover effect on image', () => (
+    <div style={{ width: '500px' }}>
+      <Item disableScrollEffect>
         <img src={require('../assets/famous-website-portrait.jpg')} alt="" />
       </Item>
     </div>
-  </div>
-));
+  ))
+  .add('with hover effect when in view', () => (
+    <div>
+      <div style={{ marginBottom: '1000px' }}>
+        Scroll Down
+      </div>
+      <div style={{ width: '600px' }}>
+        <Item name="Test" link="" tags={['Ueno is Cool']}>
+          <img src={require('../assets/famous-website-portrait.jpg')} alt="" />
+        </Item>
+      </div>
+    </div>
+  ));
 
 storiesOf('Image', module)
   .add('with src', () => (
