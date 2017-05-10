@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import Waypoint from 'react-waypoint';
+import classnames from 'classnames';
 import { canUseDOM } from '../utils';
 
 import s from './Item.scss';
@@ -11,6 +12,7 @@ export default class Item extends Component {
     link: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
     disableScrollEffect: PropTypes.bool,
+    isHovered: PropTypes.bool,
   };
 
   static contextTypes = {
@@ -21,20 +23,19 @@ export default class Item extends Component {
     tags: [],
   };
 
-  state = {
-    isReady: false,
-  };
+  constructor(props) {
+    super(props);
+
+    const { disableScrollEffect } = props;
+
+    this.state = {
+      isReady: false,
+      isActive: disableScrollEffect,
+      isDone: disableScrollEffect,
+    };
+  }
 
   componentDidMount() {
-    const { disableScrollEffect } = this.props;
-
-    if (disableScrollEffect && this.hostEl) {
-      const { classList } = this.hostEl;
-
-      classList.add(s.isActive);
-      classList.add(s.isDone);
-    }
-
     this.readyTimer = setTimeout(
       () => {
         this.setState({ isReady: true });
@@ -50,13 +51,11 @@ export default class Item extends Component {
   onChange = ({ currentPosition }) => {
     if (!this.hostEl) return;
 
-    const { classList } = this.hostEl;
-
     if (currentPosition === 'inside') {
-      classList.add(s.isActive);
+      this.setState({ isActive: true });
       this.timer = setTimeout(
         () => {
-          classList.add(s.isDone);
+          this.setState({ isDone: true });
         },
         1000,
       );
@@ -64,14 +63,12 @@ export default class Item extends Component {
 
     if (currentPosition === 'below') {
       clearTimeout(this.timer);
-      classList.remove(s.isActive);
-      classList.remove(s.isDone);
+      this.setState({ isDone: false, isActive: false });
     }
 
     if (currentPosition === 'above') {
       clearTimeout(this.timer);
-      classList.add(s.isActive);
-      classList.add(s.isDone);
+      this.setState({ isDone: true, isActive: true });
     }
   };
 
@@ -87,9 +84,15 @@ export default class Item extends Component {
   };
 
   render() {
-    const { name, tags, link, children, disableScrollEffect } = this.props;
-
-    const { isReady } = this.state;
+    const {
+      name,
+      tags,
+      link,
+      children,
+      disableScrollEffect,
+      isHovered,
+    } = this.props;
+    const { isReady, isDone, isActive } = this.state;
 
     const isExternal = /^((https?:)?\/\/|[0-9a-zA-Z]+:)/.test(link);
     const showText = name !== '' || tags.length > 0;
@@ -101,12 +104,16 @@ export default class Item extends Component {
         ref={(el) => {
           this.hostEl = el;
         }}
-        className={s.item}
+        className={classnames(s.item, {
+          [s.isHovered]: isHovered,
+          [s.isReady]: isReady,
+          [s.isDone]: isDone,
+          [s.isActive]: isActive,
+        })}
         target={isExternal ? '_blank' : null}
         rel={isExternal ? 'noopener' : null}
         onClick={this.onClick}
       >
-
         {showWaypoint
           ? <Waypoint
             scrollableAncestor={canUseDOM ? window : undefined}

@@ -42,7 +42,8 @@
     transition: transform 300ms ease-in-out;
   }
 
-  &.isDone:hover &__scale {
+  &.isDone:hover &__scale,
+  &.isDone.isHovered &__scale {
     @media (min-width: $min-desktop) {
       transform: scale(0.97);
     }
@@ -64,7 +65,8 @@
     transition: transform 300ms ease-in-out;
   }
 
-  &.isDone:hover &__assets > * {
+  &.isDone:hover &__assets > *,
+  &.isDone.isHovered &__assets > * {
     @media (min-width: $min-desktop) {
       transform: scale(1.1);
     }
@@ -99,7 +101,7 @@
     flex-wrap: wrap;
 
     padding: 0 $gutter / 2;
-    
+
     @media (min-width: $min-tablet) {
       display: inline-flex;
     }
