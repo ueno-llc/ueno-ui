@@ -20,6 +20,7 @@ export default class About extends Component {
       const ease = Power4.easeOut;
       const main = document.querySelector('#main-app');
       const height = this.about.offsetHeight;
+      const mainHeight = main.offsetHeight;
       const content = this.about.querySelectorAll(`.${s.about__inner} > *`);
       const first = this.close.querySelector(`.${s.about__svg}:first-child`);
       const last = this.close.querySelector(`.${s.about__svg}:last-child`);
@@ -47,6 +48,7 @@ export default class About extends Component {
           },
           {
             y: height,
+            height: mainHeight + height,
           },
           'start',
         );
@@ -112,6 +114,7 @@ export default class About extends Component {
           0.55,
           {
             y: 0,
+            height: 'auto',
             ease,
             clearProps: 'transform',
           },
