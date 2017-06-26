@@ -1,3 +1,5 @@
+import About from './about/About';
+import AboutDemo from './about-demo/AboutDemo';
 import Button from './button/Button';
 import Item from './item/Item';
 import Image from './image/Image';
@@ -8,4 +10,15 @@ import Textarea from './textarea/Textarea';
 import UenoButton from './ueno-button/UenoButton';
 
 export default undefined;
-export { Button, Image, Item, Input, Checkbox, Field, Textarea, UenoButton };
+export {
+  About,
+  AboutDemo,
+  Button,
+  Image,
+  Item,
+  Input,
+  Checkbox,
+  Field,
+  Textarea,
+  UenoButton,
+};

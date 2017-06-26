@@ -1,0 +1,84 @@
+@import '../styles/config';
+
+.about {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background-color: $color-background-gray;
+
+  transform: translateY(-100%);
+
+  will-change: transform;
+
+  &__wrapper {
+    @include container;
+  }
+
+  &__col {
+    @include make-row;
+  }
+
+  &__content {
+    @include make-col(100%);
+
+    @media (min-width: $min-tablet) {
+      @include make-col(percentage(6/12));
+
+      margin-left: percentage(6/12);
+    }
+  }
+
+  &__inner {
+    position: relative;
+
+    padding-top: $gutter * 4;
+    padding-bottom: $gutter * 3;
+  }
+
+  &__cross,
+  &__button {
+    opacity: 0;
+
+    will-change: opacity, transform;
+  }
+
+  &__cross {
+    @include reset-button;
+
+    position: absolute;
+    top: $gutter * 2;
+    right: 10px;
+
+    width: 21px;
+    height: 21px;
+
+    cursor: pointer;
+  }
+
+  &__svg {
+    position: absolute;
+    left: 0;
+
+    width: 21px;
+  }
+
+  &__svg:first-of-type {
+    transform: rotate(45deg);
+  }
+
+  &__svg:last-of-type {
+    transform: rotate(-45deg);
+  }
+
+  &__copy {
+    @include copy;
+
+    opacity: 0;
+
+    margin-bottom: $gutter * 1.5;
+
+    will-change: opacity, transform;
+  }
+}

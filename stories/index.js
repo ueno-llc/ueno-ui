@@ -1,6 +1,8 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import {
+  About,
+  AboutDemo,
   Button,
   Item,
   Image,
@@ -18,6 +20,8 @@ storiesOf('Button', module)
   .add('with some emoji', () => (
     <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
   ));
+
+storiesOf('About', module).add('default component', () => <AboutDemo />);
 
 storiesOf('Ueno Button', module)
   .add('with text', () => (

@@ -96,6 +96,7 @@
     "react-addons-test-utils": "15.4.2",
     "react-dom": "15.4.2",
     "react-waypoint": "^5.2.1",
+    "react-transition-group": "^1.1.3",
     "readline-sync": "1.4.7",
     "rimraf": "2.6.1",
     "sass-loader": "6.0.3",

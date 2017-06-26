@@ -5,12 +5,14 @@ export default class Button extends Component {
   static propTypes = {
     children: PropTypes.node,
     styles: PropTypes.string,
+    onClick: PropTypes.func,
   };
 
   render() {
-    const { children, styles } = this.props;
+    const { children, onClick, styles } = this.props;
+
     return (
-      <button className={[s.button, styles].join(' ')}>
+      <button className={[s.button, styles].join(' ')} onClick={onClick}>
         {children}
       </button>
     );
