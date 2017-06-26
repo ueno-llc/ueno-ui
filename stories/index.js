@@ -2,6 +2,7 @@ import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 import {
   About,
+  AboutDemo,
   Button,
   Item,
   Image,
@@ -20,16 +21,7 @@ storiesOf('Button', module)
     <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
   ));
 
-storiesOf('About', module).add('default component', () => (
-  <About
-    copy="We like beautiful things. We like making them, and we like
-      using them. So we picked some for you. You can buy them on Amazon.
-      Or you can just look at them here."
-    actionText="Go to ueno.co"
-    onClose={action('clicked')}
-    to="https://ueno.co"
-  />
-));
+storiesOf('About', module).add('default component', () => <AboutDemo />);
 
 storiesOf('Ueno Button', module)
   .add('with text', () => (
