@@ -172,7 +172,7 @@ export default class About extends Component {
                 </p>
 
                 <div className={s.about__button}>
-                  <Button href={to} black>
+                  <Button href={to}>
                     {actionText}
                   </Button>
                 </div>
