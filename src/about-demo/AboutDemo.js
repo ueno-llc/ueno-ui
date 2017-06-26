@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { TransitionGroup } from 'react-transition-group';
 
 import About from '../about/About';
 import Button from '../button/Button';
 
 export default class AboutDemo extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  };
-
   state = {
     isAboutOpen: false,
   };
@@ -21,7 +16,6 @@ export default class AboutDemo extends Component {
   };
 
   render() {
-    const { children } = this.props;
     const { isAboutOpen } = this.state;
     const text = isAboutOpen ? 'Close about' : 'Open about';
 

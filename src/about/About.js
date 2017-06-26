@@ -17,14 +17,12 @@ export default class About extends Component {
   componentWillEnter(cb) {
     if (this.about) {
       const t = new TimelineLite();
-      const ease = window.Power4.easeOut;
+      const ease = Power4.easeOut;
       const main = document.querySelector('#main-app');
       const height = this.about.offsetHeight;
       const content = this.about.querySelectorAll(`.${s.about__inner} > *`);
-      const firstLine = this.close.querySelector(
-        `.${s.about__svg}:first-child`,
-      );
-      const lastLine = this.close.querySelector(`.${s.about__svg}:last-child`);
+      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
+      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start').fromTo(
         this.about,
@@ -70,7 +68,7 @@ export default class About extends Component {
           'start+=.25',
         )
         .fromTo(
-          firstLine,
+          first,
           0.3,
         {
           rotation: 0,
@@ -82,7 +80,7 @@ export default class About extends Component {
           'start+=.4',
         )
         .fromTo(
-          lastLine,
+          last,
           0.3,
         {
           rotation: 0,
@@ -101,12 +99,10 @@ export default class About extends Component {
   componentWillLeave(cb) {
     if (this.about) {
       const t = new TimelineLite();
-      const ease = window.Power4.easeInOut;
+      const ease = Power4.easeInOut;
       const main = document.querySelector('#main-app');
-      const firstLine = this.close.querySelector(
-        `.${s.about__svg}:first-child`,
-      );
-      const lastLine = this.close.querySelector(`.${s.about__svg}:last-child`);
+      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
+      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start');
 
@@ -125,7 +121,7 @@ export default class About extends Component {
 
       t
         .to(
-          firstLine,
+          first,
           0.3,
         {
           rotation: 0,
@@ -134,7 +130,7 @@ export default class About extends Component {
           'start+=.2',
         )
         .to(
-          lastLine,
+          last,
           0.3,
         {
           rotation: 0,
