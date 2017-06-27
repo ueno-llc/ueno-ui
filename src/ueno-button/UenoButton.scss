@@ -55,6 +55,18 @@ $btn-height: 22px;
     }
   }
 
+  &.arrow &__cross {
+    display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 2px;
+    width: 12px;
+    height: 12px;
+
+    path { // stylelint-disable-line
+      fill: currentColor;
+    }
+  }
+
   &__arrowSubmit {
     display: inline-block;
     margin-right: 18px;

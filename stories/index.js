@@ -29,6 +29,9 @@ storiesOf('Ueno Button', module)
   ))
   .add('submit', () => (
     <UenoButton submit onClick={action('clicked')}>Submit</UenoButton>
+  ))
+  .add('with cross instead of arrow', () => (
+    <UenoButton hasCross onClick={action('clicked')}>Full image</UenoButton>
   ));
 
 storiesOf('Item', module)

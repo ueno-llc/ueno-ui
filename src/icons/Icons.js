@@ -1,5 +1,4 @@
 /* eslint-disable react/no-multi-comp */
-
 import React, { PureComponent, PropTypes } from 'react';
 
 class ArrowRight extends PureComponent {
@@ -56,4 +55,31 @@ class ArrowSubmit extends PureComponent {
   }
 }
 
-export { ArrowRight, ArrowSubmit };
+class Cross extends PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+  };
+
+  render() {
+    const { className } = this.props;
+
+    return (
+      <svg
+        className={className}
+        data-type="arrow"
+        width="12.5px"
+        height="12.5px"
+        viewBox="0 0 12.5 12.5"
+      >
+        <path
+          fillRule="evenodd"
+          opacity="0.502"
+          fill="rgb(255, 255, 255)"
+          d="M11.500,6.500 L6.500,6.500 L6.500,11.500 L5.500,11.500 L5.500,6.500 L0.500,6.500 L0.500,5.500 L5.500,5.500 L5.500,0.500 L6.500,0.500 L6.500,5.500 L11.500,5.500 L11.500,6.500 Z"
+        />
+      </svg>
+    );
+  }
+}
+
+export { ArrowRight, ArrowSubmit, Cross };
