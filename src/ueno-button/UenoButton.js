@@ -89,16 +89,12 @@ export default class UenoButton extends Component {
     const icon = hasCross
       ? (<Cross
         key="arrow"
-        ref={(el) => {
-          this.arrowSvga = el;
-        }}
+        ref={el => this.arrowSvga = el}
         className={s.button__cross}
       />)
       : (<ArrowRight
         key="arrow"
-        ref={(el) => {
-          this.arrowSvga = el;
-        }}
+        ref={el => this.arrowSvga = el}
         className={classnames(s.button__arrowRight, {
           arrowBack,
         })}
@@ -149,9 +145,7 @@ export default class UenoButton extends Component {
     if (isDiv) {
       return (
         <div
-          ref={(el) => {
-            this.hostEl = el;
-          }}
+          ref={el => this.hostEl = el}
           {...rest}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
@@ -167,9 +161,7 @@ export default class UenoButton extends Component {
       // http, https, //, mailto, etc.
       return (
         <a
-          ref={(el) => {
-            this.hostEl = el;
-          }}
+          ref={el => this.hostEl = el}
           href={to}
           {...rest}
           target="_blank"
@@ -188,9 +180,7 @@ export default class UenoButton extends Component {
       // Everything else
       return (
         <Link
-          ref={(el) => {
-            this.hostEl = el;
-          }}
+          ref={el => this.hostEl = el}
           to={to}
           {...rest}
           onMouseEnter={this.onMouseEnter}
@@ -206,9 +196,7 @@ export default class UenoButton extends Component {
     // Default
     return (
       <button
-        ref={(el) => {
-          this.hostEl = el;
-        }}
+        ref={el => this.hostEl = el}
         {...rest}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}
