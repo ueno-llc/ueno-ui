@@ -7,7 +7,7 @@ $font-family-tisa: 'Tisa Pro', sans-serif;
 $font-family-akagi: 'Akagi Pro', sans-serif;
 $font-family: $font-family-akagi;
 $font-family-heading: $font-family-tisa;
-$font-size: 16px;
+$font-size-base: 16px;
 $font-color: #333;
 $font-color-light: #777;
 $font-color-dark: #111;
@@ -37,7 +37,6 @@ $transition-default: 300ms;
 // Custom break point (Min)
 $min-1800: 1800px;
 $min-1440: 1440px;
-$min-1320: 1320px;
 $min-1280: 1280px;
 $min-1200: 1200px;
 $min-1080: 1080px;
@@ -57,6 +56,7 @@ $min-360: 360px;
 $min-340: 340px;
 
 // Custom break points (Max)
+$max-1440: 1439px;
 $max-1320: 1319px;
 $max-1280: 1279px;
 $max-1200: 1199px;
@@ -102,3 +102,16 @@ $segment-gutter-desktop: $gutter * 4;
 
 // outer page limit
 $limit: $page-width + ($container-gutter-desktop * 2);
+
+// z-indices stack order
+$z-index-0: 0;
+$z-index-1: 1;
+$z-index-2: 2;
+$z-index-3: 3;
+
+$z-index-10: 10; // header & navigations
+$z-index-11: 11;
+$z-index-12: 12;
+$z-index-13: 13;
+
+$z-index-100: 100; // popups & modals

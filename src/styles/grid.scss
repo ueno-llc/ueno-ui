@@ -1,3 +1,4 @@
+// Row
 @mixin make-row($direction: $grid-direction, $grid-gutter: $gutter) {
   display: flex;
 
@@ -16,9 +17,8 @@
 }
 
 // Columns
-
 @mixin make-col($width: auto, $grid-gutter: $gutter) {
-  display: block;
+  // display: block;
   padding-left: $grid-gutter/2;
   padding-right: $grid-gutter/2;
 

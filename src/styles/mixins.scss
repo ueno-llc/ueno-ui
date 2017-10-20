@@ -27,6 +27,10 @@
     min-height: 500px;
   }
 
+  @media (min-width: $min-tablet) {
+    min-height: 700px;
+  }
+
   @media (min-width: $min-desktop) {
     min-height: 840px;
   }
@@ -71,15 +75,22 @@
   $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
   $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
 
-  font-size: #{$min-size}px;
-
-  @media (min-width: $baseline) {
+  @if $min-size > $size {
+    font-size: #{$size}px;
+  }
+  @else {
     font-size: #{$min-size}px;
-    font-size: lock($min-size, $size, $limit);
   }
 
-  @media (min-width: $limit) {
-    font-size: #{$size}px;
+  @if $size > $min-size {
+    @media (min-width: $baseline) {
+      font-size: #{$min-size}px;
+      font-size: lock($min-size, $size, $limit);
+    }
+
+    @media (min-width: $limit) {
+      font-size: #{$size}px;
+    }
   }
 }
 
@@ -136,11 +147,8 @@
 
   padding-left: $container-gutter-mobile;
   padding-right: $container-gutter-mobile;
-  max-width: $page-width + $container-gutter-mobile * 1;
 
-  @media (min-width: $min-340) {
-    max-width: $page-width + $container-gutter-mobile * 2;
-  }
+  max-width: $page-width + $container-gutter-mobile * 2;
 
   @media (min-width: $min-tablet) {
     padding-left: $container-gutter-tablet;
@@ -151,23 +159,23 @@
   @media (min-width: $min-desktop) {
     padding-left: $container-gutter-desktop;
     padding-right: $container-gutter-desktop;
-    max-width: $page-width + $container-gutter-desktop * 2;
+    max-width: $limit;
   }
 }
 
 // generic padding for each section based on PSD styles
-@mixin section {
-  padding-top: $gutter * 3;
-  padding-bottom: $gutter * 3;
+@mixin section($padding-top: $section-gutter, $padding-bottom: $section-gutter, $padding-top-mobile: $section-gutter-mobile, $padding-bottom-mobile: $section-gutter-mobile) {
+  padding-top: $padding-top-mobile;
+  padding-bottom: $padding-bottom-mobile;
 
   @media (min-width: $min-tablet) {
-    padding-top: percentage(200px / $limit);
-    padding-bottom: percentage(200px / $limit);
+    padding-top: percentage(strip-unit($padding-top) / strip-unit($limit));
+    padding-bottom: percentage(strip-unit($padding-bottom) / strip-unit($limit));
   }
 
   @media (min-width: $limit) {
-    padding-top: 200px;
-    padding-bottom: 200px;
+    padding-top: strip-unit($padding-top) * 1px;
+    padding-bottom: strip-unit($padding-bottom) * 1px;
   }
 }
 
@@ -240,17 +248,18 @@
 // Form element styling
 @mixin formElement {
   @include reset-input;
+  @include copy;
   @include placeholder(#4b4d53);
 
   display: block;
   position: relative;
-  z-index: 2;
+  z-index: $z-index-2;
 
   margin-bottom: $gutter;
   width: 100%;
   height: 40px;
 
-  color: #4b4d53;
+  color: #000;
 
   border: 0;
   background-color: transparent;
@@ -295,6 +304,8 @@
   @include reset-heading;
   @include responsive-font($min, $max);
 
+  margin-bottom: (26/52) * 1em;
+
   font-family: $font-family-heading;
   font-weight: 100;
   letter-spacing: -0.035em;
@@ -303,11 +314,11 @@
   color: $font-color-subheading;
 }
 
-@mixin copy($min: 15, $max: 18) {
+@mixin copy($min: 16, $max: 20) {
   @include reset-all;
-  @include responsive-font($min,$max);
+  @include responsive-font($min, $max);
 
-  color: $font-color-content;
+  color: #000;
   letter-spacing: 0.025em;
   line-height: (28/18);
   font-weight: 200;
@@ -324,15 +335,16 @@
   font-weight: 700;
 }
 
-@mixin border($position: top) {
+// bordered section
+@mixin border($position: top, $color: $color-border) {
   position: relative;
 
   &::before {
     content: '';
 
     position: absolute;
-    left: $container-gutter-mobile / 2;
-    right: $container-gutter-mobile / 2;
+    left: $container-gutter-mobile;
+    right: $container-gutter-mobile;
 
     @if $position == 'bottom' {
       bottom: 0;
@@ -345,12 +357,7 @@
 
     max-width: $page-width;
     height: 1px;
-    background: $color-border;
-
-    @media (min-width: $min-340) {
-      left: $container-gutter-mobile;
-      right: $container-gutter-mobile;
-    }
+    background: $color;
 
     @media (min-width: $min-tablet) {
       left: $container-gutter-tablet;
@@ -363,3 +370,4 @@
     }
   }
 }
+

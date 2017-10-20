@@ -3,6 +3,7 @@
   margin: 0;
 
   font-family: inherit;
+  font-style: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
@@ -25,9 +26,7 @@
 @mixin reset-button {
   @include reset-all;
 
-  border-radius: 0;
   background: transparent;
-  -webkit-appearance: none;
   appearance: none;
 
   &:focus {
@@ -39,7 +38,6 @@
   @include reset-all;
 
   border-radius: 0;
-  -webkit-appearance: none;
   appearance: none;
 
   &:focus {
