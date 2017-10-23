@@ -6,7 +6,7 @@
 
 .wrapper.fadeIn .image {
   opacity: 0;
-  transition: opacity $transition-default ease-in;
+  transition: opacity $transition-enter ease-in;
 }
 
 .wrapper.hasLoaded .image {

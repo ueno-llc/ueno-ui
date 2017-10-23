@@ -17,14 +17,14 @@
   }
 
   &__col {
-    @include make-row;
+    @include grid-row;
   }
 
   &__content {
-    @include make-col(100%);
+    @include grid-col(100%);
 
     @media (min-width: $min-tablet) {
-      @include make-col(percentage(6/12));
+      @include grid-col(percentage(6/12));
 
       margin-left: percentage(6/12);
     }
@@ -73,7 +73,7 @@
   }
 
   &__copy {
-    @include copy;
+    @include copy(15, 18);
 
     opacity: 0;
 
