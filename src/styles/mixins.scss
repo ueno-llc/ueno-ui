@@ -14,29 +14,29 @@
   @return $number;
 }
 
-@function lock($min-size, $size, $limit) {
+@function lock($min-size, $size, $page-limit) {
   $baseline: 375px;
 
-  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
   $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
 
   @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
 }
 
 // defaults to standard heading size
-@mixin responsive-font($min-size: 23, $size: 36, $limit: 1200px) {
+@mixin responsive-font($min-size: 23, $size: 36, $page-limit: 1200px) {
   $baseline: 375px;
-  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
   $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
 
   font-size: #{$min-size}px;
 
   @media (min-width: $baseline) {
     font-size: #{$min-size}px;
-    font-size: lock($min-size, $size, $limit);
+    font-size: lock($min-size, $size, $page-limit);
   }
 
-  @media (min-width: $limit) {
+  @media (min-width: $page-limit) {
     font-size: #{$size}px;
   }
 }
@@ -176,10 +176,10 @@
   }
 }
 
-@function lock($min-size, $size, $limit) {
+@function lock($min-size, $size, $page-limit) {
   $baseline: 375px;
 
-  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
   $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
 
   @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
@@ -191,11 +191,11 @@
   padding-bottom: $padding-bottom-mobile;
 
   @media (min-width: $min-tablet) {
-    padding-top: percentage(strip-unit($padding-top) / strip-unit($limit));
-    padding-bottom: percentage(strip-unit($padding-bottom) / strip-unit($limit));
+    padding-top: percentage(strip-unit($padding-top) / strip-unit($page-limit));
+    padding-bottom: percentage(strip-unit($padding-bottom) / strip-unit($page-limit));
   }
 
-  @media (min-width: $limit) {
+  @media (min-width: $page-limit) {
     padding-top: strip-unit($padding-top) * 1px;
     padding-bottom: strip-unit($padding-bottom) * 1px;
   }
