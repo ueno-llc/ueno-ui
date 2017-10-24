@@ -1,6 +1,6 @@
 {
   "name": "ueno-ui",
-  "version": "1.2.3",
+  "version": "1.2.4-rc.1",
   "description": "Ueno. UI Components",
   "main": "commonjs/index.js",
   "files": [
