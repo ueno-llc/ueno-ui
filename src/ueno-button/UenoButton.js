@@ -120,7 +120,7 @@ export default class UenoButton extends Component {
         ref={el => this.arrowSvg = el}
         className={s.button__arrowRight, {
           [s.arrowBack]: arrowBack,
-        })}
+        }}
       />
     );
 

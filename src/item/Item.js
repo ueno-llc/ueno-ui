@@ -36,12 +36,9 @@ export default class Item extends Component {
   }
 
   componentDidMount() {
-    this.readyTimer = setTimeout(
-      () => {
-        this.setState({ isReady: true });
-      },
-      10,
-    );
+    this.readyTimer = setTimeout(() => {
+      this.setState({ isReady: true });
+    }, 10);
   }
 
   componentWillUnmount() {
@@ -53,12 +50,10 @@ export default class Item extends Component {
 
     if (currentPosition === 'inside') {
       this.setState({ isActive: true });
-      this.timer = setTimeout(
-        () => {
-          this.setState({ isDone: true });
-        },
-        1000,
-      );
+
+      this.timer = setTimeout(() => {
+        this.setState({ isDone: true });
+      }, 1000);
     }
 
     if (currentPosition === 'below') {
@@ -84,14 +79,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const {
-      name,
-      tags,
-      link,
-      children,
-      disableScrollEffect,
-      isHovered,
-    } = this.props;
+    const { name, tags, link, children, disableScrollEffect, isHovered } = this.props;
     const { isReady, isDone, isActive } = this.state;
 
     const isExternal = /^((https?:)?\/\/|[0-9a-zA-Z]+:)/.test(link);
@@ -101,9 +89,7 @@ export default class Item extends Component {
     return (
       <a
         href={link}
-        ref={(el) => {
-          this.hostEl = el;
-        }}
+        ref={(el) => { this.hostEl = el; }}
         className={classnames(s.item, {
           [s.isHovered]: isHovered,
           [s.isReady]: isReady,
@@ -113,14 +99,16 @@ export default class Item extends Component {
         target={isExternal ? '_blank' : null}
         rel={isExternal ? 'noopener' : null}
         onClick={this.onClick}
+        aria-label={`${name} item`}
       >
-        {showWaypoint
-          ? <Waypoint
+        {showWaypoint && (
+          <Waypoint
             scrollableAncestor={canUseDOM ? window : undefined}
             topOffset={200}
             onPositionChange={this.onChange}
           />
-          : null}
+        )}
+
         <div className={s.item__imageWrap}>
           <div className={s.item__scale}>
             <div className={s.item__assets}>
@@ -129,16 +117,17 @@ export default class Item extends Component {
           </div>
         </div>
 
-        {showText
-          ? <div className={s.item__center}>
+        {showText && (
+          <div className={s.item__center}>
             <h3 className={s.item__heading}>{name}</h3>
+
             <ul className={s.item__typelist}>
-              {tags.map(tag => (
-                <li className={s.item__type} key={`tag-${tag}`}>{tag}</li>
-                ))}
+              {tags.map(tag =>
+                <li className={s.item__type} key={`tag-${tag}`}>{tag}</li>,
+              )}
             </ul>
           </div>
-          : null}
+        )}
       </a>
     );
   }
