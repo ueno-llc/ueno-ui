@@ -47,6 +47,13 @@ html {
   overflow-y: scroll;
 
   box-sizing: border-box;
+
+  &.is-scroll-disabled { // stylelint-disable-line
+    body { // stylelint-disable-line
+      height: 100vh;
+      overflow: hidden;
+    }
+  }
 }
 
 // inherited from <html>
