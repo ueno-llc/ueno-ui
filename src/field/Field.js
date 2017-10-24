@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { TimelineLite, TweenLite } from 'gsap';
+import TimelineLite from 'gsap/TimelineLite';
+import TweenLite from 'gsap/TweenLite';
 import classnames from 'classnames';
 
 import Input from '../input/Input';

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { TimelineLite, Power4 } from 'gsap';
+import TimelineLite from 'gsap/TimelineLite';
 
 import Button from '../ueno-button/UenoButton';
 
@@ -17,7 +17,7 @@ export default class About extends Component {
   componentWillEnter(cb) {
     if (this.about) {
       const t = new TimelineLite();
-      const ease = Power4.easeOut;
+      const ease = 'Power4.easeOut';
       const main = document.querySelector('#main-app');
       const height = this.about.offsetHeight;
       const mainHeight = main.offsetHeight;
@@ -101,7 +101,7 @@ export default class About extends Component {
   componentWillLeave(cb) {
     if (this.about) {
       const t = new TimelineLite();
-      const ease = Power4.easeInOut;
+      const ease = 'Power4.easeInOut';
       const main = document.querySelector('#main-app');
       const first = this.close.querySelector(`.${s.about__svg}:first-child`);
       const last = this.close.querySelector(`.${s.about__svg}:last-child`);

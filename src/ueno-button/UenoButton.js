@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';
-import { TimelineLite, Power4 } from 'gsap';
+import TimelineLite from 'gsap/TimelineLite';
 import classnames from 'classnames';
 
 import { ArrowRight, ArrowSubmit, Cross } from '../icons/Icons';
@@ -10,7 +10,13 @@ import s from './UenoButton.scss';
 
 export default class UenoButton extends Component {
   static propTypes = {
-    to: PropTypes.string,
+    to: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        pathname: PropTypes.string,
+        state: PropTypes.object,
+      }),
+    ]),
     href: PropTypes.string,
     onClick: PropTypes.func,
     arrow: PropTypes.bool,
@@ -24,6 +30,7 @@ export default class UenoButton extends Component {
     submit: PropTypes.bool,
     semiBold: PropTypes.bool,
     hasCross: PropTypes.bool,
+    ariaLabel: PropTypes.string,
   };
 
   static defaultProps = {
@@ -36,26 +43,45 @@ export default class UenoButton extends Component {
 
     const el = ReactDOM.findDOMNode(this.hostEl); // eslint-disable-line
     const t = new TimelineLite();
-    const ease = Power4.easeInOut;
+    const ease = 'Power4.easeInOut';
     const hover = el.querySelector(`.${s.button__overlay}`);
-    const arrow = el.querySelector('svg[data-type=arrow]');
+    const arrow = ReactDOM.findDOMNode(this.arrowSvg);
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
-    t
-      .fromTo(hover, duration, { x: '-103%' }, { x: '-30%', ease })
-      .fromTo(arrow, duration, { x: '0' }, { x: '-15px', ease }, '-=0.8')
-      .fromTo(text, duration, { x: '0' }, { x: '20px', ease }, '-=0.8');
+    this.timer = setTimeout(
+      () => {
+        t
+          .fromTo(hover, duration, { x: '-103%' }, { x: '-30%', ease })
+          .fromTo(arrow, duration, { x: '0' }, { x: '-15px', ease }, '-=0.8')
+          .fromTo(text, duration, { x: '0' }, { x: '20px', ease }, '-=0.8');
+      },
+      40,
+    );
   };
+
+  /*
+  onFocus = () => {
+    // finish the 'slide ' animation for click/focus
+    this.onMouseLeave();
+
+    // delay workaround for 'tab' focusing
+    // we set the 'enter' animation if we're not transitioning away
+    this.timer = setTimeout(() => {
+      this.onMouseEnter();
+    }, 600); // UIStore.PAGE_TRANSITION_TIME
+  }
+  */
 
   onMouseLeave = ({ force = false } = {}) => {
     if (this.props.noAnimation && !force) return;
+    if (this.timer) clearTimeout(this.timer);
 
     const el = ReactDOM.findDOMNode(this.hostEl); // eslint-disable-line
     const t = new TimelineLite();
-    const ease = Power4.easeInOut;
+    const ease = 'Power4.easeInOut';
     const hover = el.querySelector(`.${s.button__overlay}`);
-    const arrow = el.querySelector('svg[data-type=arrow]');
+    const arrow = ReactDOM.findDOMNode(this.arrowSvg);
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
@@ -74,8 +100,9 @@ export default class UenoButton extends Component {
           <ArrowSubmit
             key="arrow"
             ref={el => this.arrowSvg = el}
-            className={s.button__arrowSubmit}
+            className={classnames(s.button__arrowSubmit, s.button__arrowSvg)}
           />
+
           <span key="text" className={s.button__content}>
             <span className={s.button__overlay} />
             <span className={s.button__text}>
@@ -89,14 +116,14 @@ export default class UenoButton extends Component {
     const icon = hasCross
       ? (<Cross
         key="arrow"
-        ref={el => this.arrowSvga = el}
-        className={s.button__cross}
+        ref={el => this.arrowSvg = el}
+        className={classnames(s.button__cross, s.button__arrowSvg)}
       />)
       : (<ArrowRight
         key="arrow"
-        ref={el => this.arrowSvga = el}
-        className={classnames(s.button__arrowRight, {
-          arrowBack,
+        ref={el => this.arrowSvg = el}
+        className={classnames(s.button__arrowRight, s.button__arrowSvg, {
+          [s.arrowBack]: arrowBack,
         })}
       />);
 
@@ -118,7 +145,7 @@ export default class UenoButton extends Component {
     const {
       to,
       arrow,
-      arrowBack,
+      arrowBack, // eslint-disable-line
       className,
       white,
       isDiv,
@@ -126,6 +153,7 @@ export default class UenoButton extends Component {
       noAnimation, // eslint-disable-line
       hasCross, // eslint-disable-line
       semiBold,
+      ariaLabel,
       ...rest
     } = this.props;
 
@@ -134,9 +162,8 @@ export default class UenoButton extends Component {
     const isExternal = this.props.href;
 
     // Extend className of the rest
-    rest.className = classnames(s.button, {
+    rest.className = classnames(s.button, className, {
       [s.arrow]: arrow,
-      [arrowBack]: arrowBack,
       [s.white]: white,
       [s.submit]: submit,
       [s.semiBold]: semiBold,
@@ -187,6 +214,7 @@ export default class UenoButton extends Component {
           onMouseLeave={this.onMouseLeave}
           onFocus={this.onMouseEnter}
           onBlur={this.onMouseLeave}
+          aria-label={ariaLabel}
         >
           {this.renderContent()}
         </Link>
@@ -202,6 +230,7 @@ export default class UenoButton extends Component {
         onMouseLeave={this.onMouseLeave}
         onFocus={this.onMouseEnter}
         onBlur={this.onMouseLeave}
+        aria-label={ariaLabel}
       >
         {this.renderContent()}
       </button>
