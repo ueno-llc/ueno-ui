@@ -118,9 +118,9 @@ export default class UenoButton extends Component {
       <ArrowRight
         key="arrow"
         ref={el => this.arrowSvg = el}
-        className={s.button__arrowRight, {
+        className={classnames(s.button__arrowRight, {
           [s.arrowBack]: arrowBack,
-        }}
+        })}
       />
     );
 

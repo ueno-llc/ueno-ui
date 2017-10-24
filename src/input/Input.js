@@ -14,6 +14,7 @@ export default class Input extends Component {
     onBlur: PropTypes.func,
     hasError: PropTypes.bool,
     className: PropTypes.string,
+    isSuccess: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -33,6 +34,7 @@ export default class Input extends Component {
       autofocus,
       hasError,
       className,
+      isSuccess,
       ...other
     } = this.props;
 
