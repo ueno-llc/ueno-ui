@@ -49,15 +49,11 @@ export default class UenoButton extends Component {
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
-    this.timer = setTimeout(
-      () => {
-        t
-          .fromTo(hover, duration, { x: '-103%' }, { x: '-30%', ease })
-          .fromTo(arrow, duration, { x: '0' }, { x: '-15px', ease }, '-=0.8')
-          .fromTo(text, duration, { x: '0' }, { x: '20px', ease }, '-=0.8');
-      },
-      40,
-    );
+    this.timer = setTimeout(() => {
+      t.fromTo(hover, duration, { x: '-103%' }, { x: '-30%', ease })
+        .fromTo(arrow, duration, { x: '0' }, { x: '-15px', ease }, '-=0.8')
+        .fromTo(text, duration, { x: '0' }, { x: '20px', ease }, '-=0.8');
+    }, 40);
   };
 
   /*
@@ -85,8 +81,7 @@ export default class UenoButton extends Component {
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
-    t
-      .to(hover, duration, { x: '103%', ease })
+    t.to(hover, duration, { x: '103%', ease })
       .to(arrow, duration, { x: '0', ease }, '-=0.8')
       .to(text, duration, { x: '0', ease }, '-=0.8');
   };
@@ -100,7 +95,7 @@ export default class UenoButton extends Component {
           <ArrowSubmit
             key="arrow"
             ref={el => this.arrowSvg = el}
-            className={classnames(s.button__arrowSubmit, s.button__arrowSvg)}
+            className={s.button__arrowSubmit}
           />
 
           <span key="text" className={s.button__content}>
@@ -113,19 +108,21 @@ export default class UenoButton extends Component {
       );
     }
 
-    const icon = hasCross
-      ? (<Cross
+    const icon = hasCross ? (
+      <Cross
         key="arrow"
         ref={el => this.arrowSvg = el}
-        className={classnames(s.button__cross, s.button__arrowSvg)}
-      />)
-      : (<ArrowRight
+        className={s.button__cross}
+      />
+    ) : (
+      <ArrowRight
         key="arrow"
         ref={el => this.arrowSvg = el}
-        className={classnames(s.button__arrowRight, s.button__arrowSvg, {
+        className={s.button__arrowRight, {
           [s.arrowBack]: arrowBack,
         })}
-      />);
+      />
+    );
 
     return (
       <span className={s.button__flex}>
