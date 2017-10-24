@@ -23,7 +23,7 @@
     "check": "yarn run test",
     "clear": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./styles.css",
     "lint": "eslint src && stylelint \"src/**/*.scss\" --syntax scss",
-    "precommit": "lint-staged && npm run test",
+    "precommit": "npm run test",
     "prepublish": "NODE_ENV=production yarn run build",
     "test": "jest",
     "test:coverage": "yarn run test -- --coverage",
@@ -44,12 +44,6 @@
     },
     "testPathIgnorePatterns": [
       "<rootDir>/(commonjs|coverage|flow-typed|node_modules|tools|umd)/"
-    ]
-  },
-  "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
     ]
   },
   "devDependencies": {
@@ -84,12 +78,8 @@
     "identity-obj-proxy": "3.0.0",
     "in-publish": "2.0.0",
     "jest": "19.0.2",
-    "lint-staged": "3.4.0",
     "node-sass": "4.5.2",
     "postcss-csso": "^2.0.0",
-    "prettier": "0.22.0",
-    "prettier-eslint": "4.3.2",
-    "prettier-eslint-cli": "3.1.3",
     "pretty-bytes": "4.0.2",
     "ramda": "0.23.0",
     "react": "15.4.2",
