@@ -1,0 +1,89 @@
+@import '../styles/config';
+
+.popup {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 105;
+
+  &__overlay {
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  &__wrapper {
+    @include container;
+  }
+
+  &__row {
+    @include grid-row;
+
+    height: 100vh;
+  }
+
+  &__inner {
+    @include grid-col;
+    align-self: flex-start;
+
+    position: relative;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    perspective: 1200px;
+
+    @media (min-width: $min-desktop) {
+      @include grid-col(percentage(6/12));
+      align-self: flex-start;
+
+      margin-left: percentage(3/12);
+    }
+  }
+
+  &__content {
+    position: relative;
+
+    background-color: #fff;
+
+    box-shadow: 0 50px 62px 0 rgba(0, 0, 0, 0.25);
+
+    overflow: hidden;
+
+    transform: translateY(300%) scale(0.6);
+    transform-style: preserve-3d;
+  }
+
+  &__animatedInside {
+    padding: $gutter * 3 40px $gutter * 2 40px;
+
+    @media (min-width: $min-desktop) {
+      padding: $gutter * 4 80px $gutter * 3 80px;
+    }
+  }
+
+  &__cross {
+    position: absolute;
+    top: $gutter;
+    right: $gutter;
+
+    margin-left: auto;
+    margin-right: -9px;
+  }
+
+  &__heading {
+    @include heading($max: 24);
+  }
+
+  &__subheading {
+    @include subheading($max: 24);
+
+    margin-bottom: $gutter * 1.25;
+  }
+}

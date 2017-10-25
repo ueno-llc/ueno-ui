@@ -8,6 +8,8 @@ import Checkbox from './checkbox/Checkbox';
 import Field from './field/Field';
 import Textarea from './textarea/Textarea';
 import UenoButton from './ueno-button/UenoButton';
+import Cross from './cross/Cross';
+import Popup from './popup/Popup';
 
 export default undefined;
 export {
@@ -21,4 +23,6 @@ export {
   Field,
   Textarea,
   UenoButton,
+  Cross,
+  Popup,
 };
