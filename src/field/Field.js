@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import TimelineLite from 'gsap/TimelineLite';
-import TweenLite from 'gsap/TweenLite';
 import classnames from 'classnames';
 
 import Input from '../input/Input';
@@ -26,7 +25,8 @@ export default class Field extends Component {
   };
 
   componentDidMount() {
-    TweenLite.set(this.labelEl, { y: 10, opacity: 0 });
+    const t = new TimelineLite();
+    t.set(this.labelEl, { y: 10, opacity: 0 });
   }
 
   onChange = onChangeOld => e => onChangeOld(e);
