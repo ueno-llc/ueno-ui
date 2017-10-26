@@ -191,7 +191,7 @@ export default class Popup extends Component {
     } = this.props;
 
     const hasResponse = response && response.status === 'subscribed';
-    const isSuccess = hasResponse && 'You successfully subscribed to the ueno.store list!';
+    const isSuccess = hasResponse && 'Subscribed!';
 
     return (
       <div className={s.popup}>
