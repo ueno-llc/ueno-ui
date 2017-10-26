@@ -32,12 +32,13 @@
     @include responsive-font(12, 14);
 
     margin: 0;
+    padding: 8px;
+
+    background: #fff;
   }
 
   &__error {
-    padding: 10px;
     color: $color-error;
-    background: #fff;
   }
 
   &__success {
