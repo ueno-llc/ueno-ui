@@ -42,6 +42,10 @@ export default class Popup extends Component {
     e.preventDefault();
   }
 
+  componentDidAppear() {
+    this.animateIn();
+  }
+
   componentWillReceiveProps(nextProps) {
     const { onClose, reset } = this.props;
     const res = nextProps.response;
@@ -58,7 +62,11 @@ export default class Popup extends Component {
     clearTimeout(this.hidePopup);
   }
 
-  componentWillEnter(cb) {
+  componentDidEnter() {
+    this.animateIn();
+  }
+
+  animateIn() {
     if (this.overlay && this.popup) {
       const t = new TimelineLite();
       const items = this.content.querySelectorAll('h2 , h3, form div');
@@ -143,14 +151,12 @@ export default class Popup extends Component {
         'start+=1.2',
       );
     }
-
-    cb();
   }
 
   componentWillLeave(cb) {
     if (this.overlay && this.popup) {
       const t = new TimelineLite();
-      const ease = window.Power4.easeInOut;
+      const ease = 'Power4.easeInOut';
 
       t.addLabel('start')
       .to(
@@ -179,6 +185,12 @@ export default class Popup extends Component {
     }
   }
 
+  closeUnlessClickedOnContent = (e) => {
+    if (!this.popup.contains(e.target)) {
+      this.props.onClose();
+    }
+  }
+
   render() {
     const {
       heading,
@@ -194,7 +206,10 @@ export default class Popup extends Component {
     const isSuccess = hasResponse && 'Subscribed!';
 
     return (
-      <div className={s.popup}>
+      <div // eslint-disable-line
+        className={s.popup}
+        onClick={this.closeUnlessClickedOnContent}
+      >
         <div className={s.popup__overlay} ref={(c) => { this.overlay = c; }} />
 
         <div className={s.popup__wrapper}>
