@@ -1,3 +1,5 @@
+import 'gsap/CSSPlugin';
+
 import React, { Component, PropTypes } from 'react';
 import TimelineLite from 'gsap/TimelineLite';
 

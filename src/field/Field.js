@@ -17,7 +17,10 @@ export default class Field extends Component {
       PropTypes.bool,
       PropTypes.string,
     ]),
-    success: PropTypes.string,
+    success: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+    ]),
     className: PropTypes.string,
   };
 

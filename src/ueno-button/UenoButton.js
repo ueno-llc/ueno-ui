@@ -1,3 +1,5 @@
+import 'gsap/CSSPlugin';
+
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom';

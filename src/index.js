@@ -10,6 +10,7 @@ import Textarea from './textarea/Textarea';
 import UenoButton from './ueno-button/UenoButton';
 import Cross from './cross/Cross';
 import Popup from './popup/Popup';
+import PopupDemo from './popup-demo/PopupDemo';
 
 export default undefined;
 export {
@@ -25,4 +26,5 @@ export {
   UenoButton,
   Cross,
   Popup,
+  PopupDemo,
 };

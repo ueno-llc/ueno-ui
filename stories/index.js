@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
+
 import {
-  About,
   AboutDemo,
-  Button,
+  PopupDemo,
   Item,
   Image,
   Field,
@@ -11,17 +11,12 @@ import {
   Checkbox,
   Textarea,
   UenoButton,
+  Button,
 } from '../src';
 
-storiesOf('Button', module)
-  .add('with text', () => (
-    <Button onClick={action('clicked')}>Hello Button</Button>
-  ))
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
-  ));
+storiesOf('About', module).add('default', () => <AboutDemo />);
 
-storiesOf('About', module).add('default component', () => <AboutDemo />);
+storiesOf('Popup', module).add('default', () => <PopupDemo />);
 
 storiesOf('Ueno Button', module)
   .add('with text', () => (
@@ -114,3 +109,11 @@ storiesOf('Form', module)
     </Field>
   ))
   .add('checkbox', () => <Checkbox name="checkbox" label="checkbox" />);
+
+storiesOf('Default button', module)
+  .add('with text', () => (
+    <Button onClick={action('clicked')}>Hello Button</Button>
+  ))
+  .add('with some emoji', () => (
+    <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
+  ));

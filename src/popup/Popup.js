@@ -1,3 +1,5 @@
+import 'gsap/CSSPlugin';
+
 import React, { Component, PropTypes } from 'react';
 import TimelineLite from 'gsap/TimelineLite';
 
@@ -70,28 +72,18 @@ export default class Popup extends Component {
     if (this.overlay && this.popup) {
       const t = new TimelineLite();
       const items = this.content.querySelectorAll('h2 , h3, form div');
+      const ease = 'Power4.easeInOut';
 
       t.addLabel('start')
       .set(
         this.cross,
-        {
-          opacity: 0,
-        },
+        { opacity: 0 },
       )
       .fromTo(
         this.overlay,
         0.8,
-        {
-          opacity: 0,
-          ease: 'Power4.easeInOut',
-          // ease: window.CustomEase.create(
-          //   'custom',
-          //   '.33, 0, .67, 1',
-          // ),
-        },
-        {
-          opacity: 1,
-        },
+        { opacity: 0, ease },
+        { opacity: 1 },
         'start',
       )
       .fromTo(
@@ -102,11 +94,7 @@ export default class Popup extends Component {
           y: '300%',
           rotationX: -25,
           scale: 0.6,
-          ease: 'Power4.easeInOut',
-          // ease: window.CustomEase.create(
-          //   'custom',
-          //   '.33, 0, .66, 1',
-          // ),
+          ease,
         },
         {
           rotationX: 0,
@@ -121,11 +109,7 @@ export default class Popup extends Component {
         {
           y: 80,
           opacity: 0,
-          ease: 'Power4.easeInOut',
-          // ease: window.CustomEase.create(
-          //   'custom',
-          //   '.18, .95, .51, 1',
-          // ),
+          ease,
         },
         {
           y: 0,
@@ -140,14 +124,8 @@ export default class Popup extends Component {
         {
           oapcity: 0,
           ease: 'Power4.easeInOut',
-          // ease: window.CustomEase.create(
-          //   'custom',
-          //   '.33, 0, .67, 1',
-          // ),
         },
-        {
-          opacity: 1,
-        },
+        { opacity: 1 },
         'start+=1.2',
       );
     }
@@ -162,10 +140,7 @@ export default class Popup extends Component {
       .to(
         this.overlay,
         0.4,
-        {
-          opacity: 0,
-          ease,
-        },
+        { opacity: 0, ease },
         'start',
       )
       .to(
