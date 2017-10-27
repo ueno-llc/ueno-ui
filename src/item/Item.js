@@ -1,11 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import Waypoint from 'react-waypoint';
 import classnames from 'classnames';
+
 import { canUseDOM } from '../utils';
 
 import s from './Item.scss';
 
 export default class Item extends Component {
+
   static propTypes = {
     children: PropTypes.node,
     name: PropTypes.string,

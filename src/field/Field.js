@@ -8,6 +8,7 @@ import Textarea from '../textarea/Textarea';
 import s from './Field.scss';
 
 export default class Field extends Component {
+
   static propTypes = {
     children: PropTypes.node,
     label: PropTypes.string,
@@ -95,7 +96,7 @@ export default class Field extends Component {
         <label
           htmlFor={id}
           className={s.field__label}
-          ref={ref => this.labelEl = ref}
+          ref={(ref) => { this.labelEl = ref; }}
         >
           {label}
         </label>
@@ -105,7 +106,7 @@ export default class Field extends Component {
             placeholder: label,
             name,
             id,
-            ref: ref => this.inputEl = ref,
+            ref: (ref) => { this.inputEl = ref; },
           };
 
           if (c.type === inputType) {

@@ -7,6 +7,7 @@ import Line from './Line';
 import s from './About.scss';
 
 export default class About extends Component {
+
   static propTypes = {
     copy: PropTypes.string,
     onClose: PropTypes.func,

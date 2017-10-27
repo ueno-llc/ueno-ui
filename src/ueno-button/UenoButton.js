@@ -9,6 +9,7 @@ import { ArrowRight, ArrowSubmit, Cross } from '../icons/Icons';
 import s from './UenoButton.scss';
 
 export default class UenoButton extends Component {
+
   static propTypes = {
     to: PropTypes.oneOfType([
       PropTypes.string,
@@ -45,7 +46,7 @@ export default class UenoButton extends Component {
     const t = new TimelineLite();
     const ease = 'Power4.easeInOut';
     const hover = el.querySelector(`.${s.button__overlay}`);
-    const arrow = ReactDOM.findDOMNode(this.arrowSvg);
+    const arrow = ReactDOM.findDOMNode(this.arrowSvg); // eslint-disable-line
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
@@ -77,7 +78,7 @@ export default class UenoButton extends Component {
     const t = new TimelineLite();
     const ease = 'Power4.easeInOut';
     const hover = el.querySelector(`.${s.button__overlay}`);
-    const arrow = ReactDOM.findDOMNode(this.arrowSvg);
+    const arrow = ReactDOM.findDOMNode(this.arrowSvg); // eslint-disable-line
     const text = el.querySelector(`.${s.button__text}`);
     const duration = 0.8;
 
@@ -94,7 +95,7 @@ export default class UenoButton extends Component {
         <span className={s.button__flex}>
           <ArrowSubmit
             key="arrow"
-            ref={el => this.arrowSvg = el}
+            ref={(el) => { this.arrowSvg = el; }}
             className={s.button__arrowSubmit}
           />
 
@@ -111,13 +112,13 @@ export default class UenoButton extends Component {
     const icon = hasCross ? (
       <Cross
         key="arrow"
-        ref={el => this.arrowSvg = el}
+        ref={(el) => { this.arrowSvg = el; }}
         className={s.button__cross}
       />
     ) : (
       <ArrowRight
         key="arrow"
-        ref={el => this.arrowSvg = el}
+        ref={(el) => { this.arrowSvg = el; }}
         className={classnames(s.button__arrowRight, {
           [s.arrowBack]: arrowBack,
         })}
@@ -169,7 +170,7 @@ export default class UenoButton extends Component {
     if (isDiv) {
       return (
         <div
-          ref={el => this.hostEl = el}
+          ref={(el) => { this.hostEl = el; }}
           {...rest}
           onMouseEnter={this.onMouseEnter}
           onMouseLeave={this.onMouseLeave}
@@ -185,7 +186,7 @@ export default class UenoButton extends Component {
       // http, https, //, mailto, etc.
       return (
         <a
-          ref={el => this.hostEl = el}
+          ref={(el) => { this.hostEl = el; }}
           href={to}
           {...rest}
           target="_blank"
@@ -204,7 +205,7 @@ export default class UenoButton extends Component {
       // Everything else
       return (
         <Link
-          ref={el => this.hostEl = el}
+          ref={(el) => { this.hostEl = el; }}
           to={to}
           {...rest}
           onMouseEnter={this.onMouseEnter}
@@ -221,7 +222,7 @@ export default class UenoButton extends Component {
     // Default
     return (
       <button
-        ref={el => this.hostEl = el}
+        ref={(el) => { this.hostEl = el; }}
         {...rest}
         onMouseEnter={this.onMouseEnter}
         onMouseLeave={this.onMouseLeave}

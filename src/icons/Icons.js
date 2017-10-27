@@ -2,6 +2,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 
 class ArrowRight extends PureComponent {
+
   static propTypes = {
     className: PropTypes.string,
   };

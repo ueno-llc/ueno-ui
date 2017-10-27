@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import s from './Input.scss';
 
 export default class Input extends Component {
+
   static propTypes = {
     id: PropTypes.string,
     type: PropTypes.string,
@@ -44,7 +45,7 @@ export default class Input extends Component {
 
     return (
       <input
-        ref={ref => this.input = ref}
+        ref={(ref) => { this.input = ref; }}
         id={id}
         className={classNames}
         type={type}

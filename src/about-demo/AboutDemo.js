@@ -5,6 +5,7 @@ import About from '../about/About';
 import Button from '../button/Button';
 
 export default class AboutDemo extends Component {
+
   state = {
     isAboutOpen: false,
   };

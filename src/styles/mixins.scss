@@ -233,7 +233,7 @@
       margin-right: -$container-gutter-desktop;
     }
 
-    @media (min-width: $page-width + $heroOffset - 50px ) {
+    @media (min-width: $page-width + $heroOffset - 50px) {
       margin-right: calc((100vw - #{$page-width}) / -2);
     }
 

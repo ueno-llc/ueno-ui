@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import s from './Textarea.scss';
 
 export default class Textarea extends Component {
+
   static propTypes = {
     id: PropTypes.string,
     placeholder: PropTypes.string,

@@ -1,10 +1,13 @@
 import React, { Component, PropTypes } from 'react';
 import Waypoint from 'react-waypoint';
 import classNames from 'classnames';
+
 import { canUseDOM } from '../utils';
+
 import s from './Image.scss';
 
 export default class Image extends Component {
+
   static propTypes = {
     src: PropTypes.oneOfType([
       PropTypes.string,

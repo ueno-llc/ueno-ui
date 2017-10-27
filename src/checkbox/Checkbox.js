@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import classnames from 'classnames';
+
 import s from './Checkbox.scss';
 
 export default class Checkbox extends Component {
+
   static propTypes = {
     name: PropTypes.string,
     label: PropTypes.string,
