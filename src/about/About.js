@@ -26,16 +26,12 @@ export default class About extends Component {
       const first = this.close.querySelector(`.${s.about__svg}:first-child`);
       const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
-      t.addLabel('start').fromTo(
+      t.addLabel('start')
+      .fromTo(
         this.about,
         0.45,
-        {
-          y: '-100%',
-          ease,
-        },
-        {
-          y: '0%',
-        },
+        { y: '-100%', ease },
+        { y: '0%' },
         'start',
       );
 
@@ -43,10 +39,7 @@ export default class About extends Component {
         t.fromTo(
           main,
           0.45,
-          {
-            y: 0,
-            ease,
-          },
+          { y: 0, ease },
           {
             y: height,
             height: mainHeight + height,
@@ -55,10 +48,9 @@ export default class About extends Component {
         );
       }
 
-      t
-        .staggerFromTo(
-          content,
-          0.45,
+      t.staggerFromTo(
+        content,
+        0.45,
         {
           y: -50,
           opacity: 0,
@@ -67,33 +59,23 @@ export default class About extends Component {
           y: 0,
           opacity: 1,
         },
-          0.075,
-          'start+=.25',
-        )
-        .fromTo(
-          first,
-          0.3,
-        {
-          rotation: 0,
-          ease,
-        },
-        {
-          rotation: 45,
-        },
-          'start+=.4',
-        )
-        .fromTo(
-          last,
-          0.3,
-        {
-          rotation: 0,
-          ease,
-        },
-        {
-          rotation: -45,
-        },
-          'start+=.4',
-        );
+        0.075,
+        'start+=.25',
+      )
+      .fromTo(
+        first,
+        0.3,
+        { rotation: 0, ease },
+        { rotation: 45 },
+        'start+=.4',
+      )
+      .fromTo(
+        last,
+        0.3,
+        { rotation: 0, ease },
+        { rotation: -45 },
+        'start+=.4',
+      );
     }
 
     cb();
@@ -123,26 +105,19 @@ export default class About extends Component {
         );
       }
 
-      t
-        .to(
-          first,
-          0.3,
-        {
-          rotation: 0,
-          ease,
-        },
-          'start+=.2',
-        )
-        .to(
-          last,
-          0.3,
-        {
-          rotation: 0,
-          ease,
-        },
-          'start+=.2',
-        )
-        .call(cb);
+      t.to(
+        first,
+        0.3,
+        { rotation: 0, ease },
+        'start+=.2',
+      )
+      .to(
+        last,
+        0.3,
+        { rotation: 0, ease },
+        'start+=.2',
+      )
+      .call(cb);
     }
   }
 
@@ -152,9 +127,7 @@ export default class About extends Component {
     return (
       <div
         className={s.about}
-        ref={(c) => {
-          this.about = c;
-        }}
+        ref={(c) => { this.about = c; }}
       >
         <div className={s.about__wrapper}>
           <div className={s.about__col}>
@@ -163,9 +136,7 @@ export default class About extends Component {
                 <button
                   className={s.about__cross}
                   onClick={onClose}
-                  ref={(c) => {
-                    this.close = c;
-                  }}
+                  ref={(c) => { this.close = c; }}
                 >
                   <Line className={s.about__svg} />
                   <Line className={s.about__svg} />

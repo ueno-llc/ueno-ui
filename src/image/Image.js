@@ -44,6 +44,7 @@ export default class Image extends Component {
     if (typeof src === 'string') {
       return src;
     }
+
     return src.src;
   };
 
@@ -51,12 +52,11 @@ export default class Image extends Component {
     if (typeof src === 'string') {
       return undefined;
     }
-    return Object.keys(src)
-      .map((k) => {
-        const size = k.slice(3) || '1x';
-        return `${src[k]} ${size}`;
-      })
-      .join(', ');
+
+    return Object.keys(src).map((k) => {
+      const size = k.slice(3) || '1x';
+      return `${src[k]} ${size}`;
+    }).join(', ');
   };
 
   onLoad = () => this.setState({ loaded: true });
@@ -65,6 +65,7 @@ export default class Image extends Component {
   renderImg = () => {
     const { lazy } = this.props;
     const { visible } = this.state;
+
     if (lazy && !visible) {
       return null;
     }
@@ -77,15 +78,14 @@ export default class Image extends Component {
     } = this.props;
 
     const hasPlaceholder = Boolean(width && height);
+
     return (
       <img
         src={this.makeSrc(src)}
         srcSet={this.makeSrcSet(src)}
         alt={alt}
         role={alt === '' ? 'presentation' : undefined}
-        className={classNames(s.image, {
-          hasPlaceholder,
-        })}
+        className={classNames(s.image, { hasPlaceholder })}
         onLoad={this.onLoad}
         width={width}
         height={height}
@@ -129,7 +129,6 @@ export default class Image extends Component {
     } = this.props;
 
     const { loaded, visible } = this.state;
-
     const hasPlaceholder = Boolean(width && height);
 
     return (
@@ -138,17 +137,16 @@ export default class Image extends Component {
           fadeIn: (hasPlaceholder || lazy) && !progressive,
           hasLoaded: loaded,
         })}
-        ref={(el) => {
-          this.wrapper = el;
-        }}
+        ref={(el) => { this.wrapper = el; }}
         style={{ width: +width || 'auto' }}
       >
-        {lazy &&
-          !visible &&
+        {lazy && !visible && (
           <Waypoint
             scrollableAncestor={scrollableAncestor}
             onEnter={this.onEnter}
-          />}
+          />
+        )}
+
         {this.renderInner()}
       </div>
     );

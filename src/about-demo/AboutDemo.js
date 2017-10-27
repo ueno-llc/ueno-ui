@@ -23,7 +23,7 @@ export default class AboutDemo extends Component {
     return (
       <div>
         <TransitionGroup>
-          {isAboutOpen &&
+          {isAboutOpen && (
             <About
               copy="We like beautiful things. We like making them, and we like
                 using them. So we picked some for you. You can buy them on Amazon.
@@ -31,7 +31,8 @@ export default class AboutDemo extends Component {
               actionText="Go to ueno.co"
               onClose={this.toggleAbout}
               to="https://ueno.co"
-            />}
+            />
+          )}
         </TransitionGroup>
 
         {/*
