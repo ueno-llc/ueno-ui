@@ -7,3 +7,7 @@
 .error:not(:focus) {
   border-color: $color-error;
 }
+
+.success:not(:focus) {
+  border-color: $color-success;
+}

@@ -41,6 +41,7 @@ export default class Input extends Component {
 
     const classNames = classnames(s.input, className, {
       [s.error]: hasError,
+      [s.success]: isSuccess,
     });
 
     return (
