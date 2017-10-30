@@ -23,6 +23,18 @@
   @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
 }
 
+// set copy element width based on font sizes
+// all values must be computed from px-equivalent values
+@mixin copy-dimensions($width: auto, $margin: 0, $font-size: $font-size) {
+  @if $margin != 0 {
+    margin-bottom: (strip-unit($margin/$font-size)) * 1em;
+  }
+
+  @if $width != auto {
+    max-width: (strip-unit($width) / strip-unit(strip-unit($font-size))) * 1em;
+  }
+}
+
 // defaults to standard heading size
 @mixin responsive-font($min-size: 23, $size: 36, $page-limit: 1200px) {
   $baseline: 375px;
@@ -311,7 +323,7 @@
   @include reset-heading;
   @include responsive-font($min, $max);
 
-  margin-bottom: (5/52)*1em;
+  margin-bottom: (5/52) * 1em;
 
   font-family: $font-family-heading;
   font-weight: 200;
