@@ -10,6 +10,7 @@ export default class Item extends Component {
 
   static propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     name: PropTypes.string,
     link: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string),
@@ -81,7 +82,7 @@ export default class Item extends Component {
   };
 
   render() {
-    const { name, tags, link, children, disableScrollEffect, isHovered } = this.props;
+    const { name, tags, link, className, children, disableScrollEffect, isHovered } = this.props;
     const { isReady, isDone, isActive } = this.state;
 
     const isExternal = /^((https?:)?\/\/|[0-9a-zA-Z]+:)/.test(link);
@@ -92,7 +93,7 @@ export default class Item extends Component {
       <a
         href={link}
         ref={(el) => { this.hostEl = el; }}
-        className={classnames(s.item, {
+        className={classnames(s.item, className, {
           [s.isHovered]: isHovered,
           [s.isReady]: isReady,
           [s.isDone]: isDone,
