@@ -1,6 +1,7 @@
 import 'gsap/CSSPlugin';
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TimelineLite from 'gsap/TimelineLite';
 
 import UenoButton from '../ueno-button/UenoButton';

@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
-import React, { PureComponent, PropTypes } from 'react';
+import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 class ArrowRight extends PureComponent {
 

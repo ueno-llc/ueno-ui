@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import Intro from './components/intro/Intro';
 import Variation from './components/variation/Variation';

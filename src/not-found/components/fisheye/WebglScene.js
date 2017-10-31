@@ -3,8 +3,6 @@ import 'gsap/CSSPlugin';
 import * as THREE from 'three';
 import TimelineLite from 'gsap/TimelineLite';
 
-const Video404 = 'https://ueno.co/api/assets/404.mp4';
-
 export default class WebglScene {
 
   constructor(container, statsEl, webglClassName, src) {

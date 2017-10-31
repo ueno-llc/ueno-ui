@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import WebglScene from './WebglScene';
 import s from './Fisheye.scss';
 
 export default class Fisheye extends Component {
+
+  static propTypes = {
+    src: PropTypes.string,
+  };
 
   fixOrientation = 1;
   orientationDevice = 'portrait';
@@ -13,7 +18,12 @@ export default class Fisheye extends Component {
     console.log = (first, ...args) => (first !== 'THREE.WebGLRenderer') && consoleLog.call(console, first, ...args); // eslint-disable-line no-console
 
     // Setup constructors
-    this.webglScene = new WebglScene(this.canvasWrapper, this.statsEl, s.canvasElement, this.props.src);
+    this.webglScene = new WebglScene(
+      this.canvasWrapper,
+      this.statsEl,
+      s.canvasElement,
+      this.props.src,
+    );
 
     // bug fix android / iOS
     if (window.navigator.userAgent.match(/^.*(iPhone|iPad).*(OS\s[0-9]).*(CriOS|Version)\/[.0-9]*\sMobile.*$/i)) {
