@@ -4,6 +4,7 @@ import Button from './button/Button';
 import Item from './item/Item';
 import Image from './image/Image';
 import Input from './input/Input';
+import Select from './select/Select';
 import Checkbox from './checkbox/Checkbox';
 import Field from './field/Field';
 import Textarea from './textarea/Textarea';
@@ -22,6 +23,7 @@ export {
   Image,
   Item,
   Input,
+  Select,
   Checkbox,
   Field,
   Textarea,

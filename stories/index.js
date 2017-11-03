@@ -8,6 +8,7 @@ import {
   Image,
   Field,
   Input,
+  Select,
   Checkbox,
   Textarea,
   UenoButton,
@@ -106,6 +107,17 @@ storiesOf('Form', module)
   .add('textarea with error', () => (
     <Field label="Text" name="text" error="Text missing">
       <Textarea hasError error />
+    </Field>
+  ))
+  .add('select', () => (
+    <Field label="Text" name="text">
+      <Select name="checkbox" label="checkbox">
+        <option selected disabled>Default and disabled option</option>
+        <option>Other option 1</option>
+        <option>Other option 2</option>
+        <option>Other option 3</option>
+        <option>Other option 4</option>
+      </Select>
     </Field>
   ))
   .add('checkbox', () => <Checkbox name="checkbox" label="checkbox" />);
