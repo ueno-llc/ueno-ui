@@ -44,4 +44,17 @@
   &__success {
     color: $color-success;
   }
+
+  &__arrow {
+    position: absolute;
+    bottom: 14px;
+    right: 0;
+
+    z-index: $z-index-1;
+    transform: rotate(90deg);
+
+    path { // stylelint-disable-line
+      fill: #000;
+    }
+  }
 }

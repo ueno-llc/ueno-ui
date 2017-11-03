@@ -112,7 +112,7 @@ storiesOf('Form', module)
   .add('select', () => (
     <Field label="Text" name="text">
       <Select name="checkbox" label="checkbox">
-        <option selected disabled>Default and disabled option</option>
+        <option defaultValue disabled>Default and disabled option</option>
         <option>Other option 1</option>
         <option>Other option 2</option>
         <option>Other option 3</option>

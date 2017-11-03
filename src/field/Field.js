@@ -4,7 +4,9 @@ import TimelineLite from 'gsap/TimelineLite';
 import classnames from 'classnames';
 
 import Input from '../input/Input';
+import Select from '../select/Select';
 import Textarea from '../textarea/Textarea';
+import { ArrowSubmit } from '../icons/Icons';
 
 import s from './Field.scss';
 
@@ -64,9 +66,10 @@ export default class Field extends Component {
     const { children, label, name, error, success, className } = this.props;
     const id = `field_${name}`;
     const inputType = <Input />.type;
-    const selectType = <select />.type;
+    const selectType = (<Select />).type;
     const textareaType = <Textarea />.type;
     const childs = React.Children.toArray(children);
+    const isSelect = Boolean(childs.filter(c => c.type === selectType).length);
 
     const errorBlock = error && (
       <div className={s.field__message}>
@@ -134,6 +137,8 @@ export default class Field extends Component {
         })}
 
         {rest}
+
+        {isSelect && <ArrowSubmit className={s.field__arrow} />}
       </div>
     );
   }
