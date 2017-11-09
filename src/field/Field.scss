@@ -19,17 +19,42 @@
     @include formElement;
   }
 
-  &__error {
+  &__message {
     display: flex;
+
     position: absolute;
-    bottom: 10px;
+    bottom: 2px;
     right: 0;
+    z-index: $z-index-3;
   }
 
-  &__message {
+  &__text {
+    @include responsive-font(12, 14);
+
     margin: 0;
-    font-size: 14px;
-    font-family: $font-family-akagi;
+    padding: 8px;
+
+    background: #fff;
+  }
+
+  &__error {
     color: $color-error;
+  }
+
+  &__success {
+    color: $color-success;
+  }
+
+  &__arrow {
+    position: absolute;
+    bottom: 14px;
+    right: 0;
+
+    z-index: $z-index-1;
+    transform: rotate(90deg);
+
+    path { // stylelint-disable-line
+      fill: #000;
+    }
   }
 }

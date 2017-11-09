@@ -1,0 +1,24 @@
+@import '../../../styles/config';
+
+.variation {
+  &__subheading {
+    @include subheading;
+
+    margin-bottom: (26/52) * 1em;
+  }
+
+  &__copy {
+    @include copy;
+    @include copy-dimensions(340);
+
+    margin-bottom: $gutter * 0.2;
+
+    @media (min-width: $min-tablet) {
+      margin-bottom: $gutter * 0.75;
+    }
+
+    @media (min-width: $min-desktop) {
+      @include copy-dimensions(450);
+    }
+  }
+}

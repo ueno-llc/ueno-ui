@@ -1,6 +1,6 @@
 {
   "name": "ueno-ui",
-  "version": "1.2.3",
+  "version": "1.3.5",
   "description": "Ueno. UI Components",
   "main": "commonjs/index.js",
   "files": [
@@ -22,8 +22,10 @@
     "build": "yarn clear && babel-node ./tools/scripts/build.js",
     "check": "yarn run test",
     "clear": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./styles.css",
-    "lint": "eslint src && stylelint \"src/**/*.scss\" --syntax scss",
-    "precommit": "lint-staged && npm run test",
+    "eslint": "eslint src",
+    "stylelint": "stylelint \"src/**/*.scss\" --syntax scss",
+    "lint": "npm run eslint -q; npm run stylelint -q",
+    "precommit": "npm run test",
     "prepublish": "NODE_ENV=production yarn run build",
     "test": "jest",
     "test:coverage": "yarn run test -- --coverage",
@@ -46,18 +48,14 @@
       "<rootDir>/(commonjs|coverage|flow-typed|node_modules|tools|umd)/"
     ]
   },
-  "lint-staged": {
-    "*.js": [
-      "prettier-eslint --write",
-      "git add"
-    ]
-  },
   "devDependencies": {
     "@kadira/storybook": "2.21.0",
+    "@ueno/eslint-config": "0.0.2",
+    "@ueno/stylelint-config": "0.0.3",
     "app-root-dir": "1.0.2",
     "babel-cli": "6.24.0",
     "babel-core": "6.24.0",
-    "babel-eslint": "7.2.1",
+    "babel-eslint": "7.2.3",
     "babel-jest": "19.0.0",
     "babel-loader": "6.4.1",
     "babel-plugin-css-modules-transform": "1.2.7",
@@ -72,7 +70,7 @@
     "cross-env": "3.2.4",
     "css-loader": "0.28.0",
     "enzyme": "2.8.0",
-    "eslint": "3.18.0",
+    "eslint": "3.19.0",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "4.0.0",
@@ -84,12 +82,8 @@
     "identity-obj-proxy": "3.0.0",
     "in-publish": "2.0.0",
     "jest": "19.0.2",
-    "lint-staged": "3.4.0",
     "node-sass": "4.5.2",
     "postcss-csso": "^2.0.0",
-    "prettier": "0.22.0",
-    "prettier-eslint": "4.3.2",
-    "prettier-eslint-cli": "3.1.3",
     "pretty-bytes": "4.0.2",
     "ramda": "0.23.0",
     "react": "15.4.2",
@@ -99,9 +93,7 @@
     "rimraf": "2.6.1",
     "sass-loader": "6.0.3",
     "style-loader": "0.16.1",
-    "stylelint": "7.9.0",
-    "stylelint-order": "0.4.3",
-    "stylelint-scss": "1.4.3",
+    "stylelint": "8.0.0",
     "url-loader": "^0.5.8",
     "webpack": "2.3.2",
     "webpack-dev-middleware": "1.10.1",
@@ -109,9 +101,11 @@
   },
   "dependencies": {
     "css-modules-require-hook": "^4.0.6",
-    "gsap": "^1.19.1",
+    "gsap": "^1.20.3",
+    "prop-types": "^15.6.0",
     "react-router-dom": "^4.1.1",
-    "react-transition-group": "^1.1.3",
-    "react-waypoint": "5.2.1"
+    "react-transition-group": "1.1.3",
+    "react-waypoint": "5.2.1",
+    "three": "^0.87.1"
   }
 }

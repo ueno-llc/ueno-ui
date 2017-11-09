@@ -1,6 +1,15 @@
 $gutter: 30px;
+$container-gutter-mobile: $gutter;
+$container-gutter-tablet: 50px;
+$container-gutter-desktop: 70px;
+
+// grid
+$grid-column-count: 12;
+$grid-baseline: 16px;
+
+// page dimensions
 $page-width: 1290px;
-// $limit set after $container-gutter-desktop is defined
+$page-limit: $page-width + ($container-gutter-desktop * 2);
 
 // Fonts
 $font-family-tisa: 'Tisa Pro', sans-serif;
@@ -8,19 +17,20 @@ $font-family-akagi: 'Akagi Pro', sans-serif;
 $font-family: $font-family-akagi;
 $font-family-heading: $font-family-tisa;
 $font-size: 16px;
-$font-color: #333;
-$font-color-light: #777;
-$font-color-dark: #111;
-$font-color-subheading: #9ea0a6;
-$font-color-content: #777b85;
 $line-height: 1.5;
 
 // Colors
+$color-font: #333;
+$color-background: #fff;
+$color-light: #777;
+$color-dark: #111;
 $color-pink: #b4649c;
-$color-pink-light: #d89ba2;
+$color-primary: $color-pink;
+$color-placeholder: #ddd;
+$color-subheading: #9ea0a6;
+$color-content: #777b85;
 $color-background-gray: #fafafa;
 $color-background-alt: #f2f5f7;
-$color-primary: $color-pink;
 $color-font-light-gray: #999;
 $color-section-bg: #f7f9fb;
 $color-label: #6b6e77;
@@ -32,7 +42,6 @@ $color-border: #eee;
 // Timings
 $transition-enter: 200ms;
 $transition-leave: 500ms;
-$transition-default: 300ms;
 
 // Custom break point (Min)
 $min-1800: 1800px;
@@ -57,6 +66,7 @@ $min-360: 360px;
 $min-340: 340px;
 
 // Custom break points (Max)
+$max-1440: 1439px;
 $max-1320: 1319px;
 $max-1280: 1279px;
 $max-1200: 1199px;
@@ -75,30 +85,38 @@ $max-375: 374px;
 $max-360: 359px;
 $max-340: 339px;
 
-// Grid
-$grid-direction: left;
-
 // Predefined breakpoints
 $min-mobile: $min-480;
 $min-tablet: $min-720;
 $min-desktop: $min-1080;
-
-$max-mobile: $max-480;
-$max-tablet: $max-720;
-$max-desktop: $max-1080;
-
-// affix component breakpoint
-$min-affix: $min-960;
-
-// Container gutter
-$container-gutter-mobile: $gutter;
-$container-gutter-tablet: 50px;
-$container-gutter-desktop: 70px;
 
 // Segment spacing
 $segment-gutter-mobile: $gutter * 3;
 $segment-gutter-tablet: $gutter * 3;
 $segment-gutter-desktop: $gutter * 4;
 
-// outer page limit
-$limit: $page-width + ($container-gutter-desktop * 2);
+// Section spacing
+$section-gutter-mobile: $gutter * 3;
+$section-gutter: 200px;
+
+// scale for edge-case wide pages
+// used in :root in base.scss
+$scale: 1;
+$scale-md: 0.9;
+$scale-sm: 0.8;
+
+// affix component breakpoint
+$min-affix: $min-960;
+
+// z-indices stack order
+$z-index-0: 0;
+$z-index-1: 1;
+$z-index-2: 2;
+$z-index-3: 3;
+
+$z-index-10: 10; // header & navigations
+$z-index-11: 11;
+$z-index-12: 12;
+$z-index-13: 13;
+
+$z-index-100: 100; // popups & modals

@@ -6,6 +6,141 @@
   left: 0;
 }
 
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function lock($min-size, $size, $page-limit) {
+  $baseline: 375px;
+
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
+  $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
+
+  @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
+}
+
+// set copy element width based on font sizes
+// all values must be computed from px-equivalent values
+@mixin copy-dimensions($width: auto, $margin: 0, $font-size: $font-size) {
+  @if $margin != 0 {
+    margin-bottom: (strip-unit($margin/$font-size)) * 1em;
+  }
+
+  @if $width != auto {
+    max-width: (strip-unit($width) / strip-unit(strip-unit($font-size))) * 1em;
+  }
+}
+
+// defaults to standard heading size
+@mixin responsive-font($min-size: 23, $size: 36, $page-limit: 1200px) {
+  $baseline: 375px;
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
+  $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
+
+  font-size: #{$min-size}px;
+
+  @media (min-width: $baseline) {
+    font-size: #{$min-size}px;
+    font-size: lock($min-size, $size, $page-limit);
+  }
+
+  @media (min-width: $page-limit) {
+    font-size: #{$size}px;
+  }
+}
+
+@mixin retina {
+  @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
+    only screen and (-o-min-device-pixel-ratio: 13/10),
+    only screen and (min-resolution: 120dpi) {
+    @content;
+  }
+}
+
+// segment customisable per-component / instance rather than being forced to work around defaults.
+@mixin segment() {
+  position: relative;
+
+  padding-top: $segment-gutter-mobile;
+  padding-bottom: $segment-gutter-mobile - $gutter;
+
+  @media (min-width: $min-tablet) {
+    padding-top: $segment-gutter-tablet;
+    padding-bottom: $segment-gutter-tablet - $gutter;
+  }
+
+  @media (min-width: $min-desktop) {
+    padding-top: $segment-gutter-desktop;
+    padding-bottom: $segment-gutter-desktop - $gutter;
+  }
+
+  @media (min-width: $min-1440) {
+    padding-top: $segment-gutter-desktop * 1.75;
+    padding-bottom: $segment-gutter-desktop * 1.75 - $gutter;
+  }
+}
+
+@mixin container() {
+  margin: 0 auto;
+
+  padding-left: $container-gutter-mobile;
+  padding-right: $container-gutter-mobile;
+
+  max-width: $page-width + $container-gutter-mobile * 1;
+
+  @media (min-width: $min-mobile) {
+    max-width: $page-width + $container-gutter-mobile * 2;
+  }
+
+  @media (min-width: $min-tablet) {
+    padding-left: $container-gutter-tablet;
+    padding-right: $container-gutter-tablet;
+    max-width: $page-width + $container-gutter-tablet * 2;
+  }
+
+  @media (min-width: $min-desktop) {
+    padding-left: $container-gutter-desktop;
+    padding-right: $container-gutter-desktop;
+    max-width: $page-width + $container-gutter-desktop * 2;
+  }
+}
+
+// html.js / html.no-js will not compile?!
+// hence these workaround selectors
+@mixin js-only {
+  html:not(:global(.no-js)) & {
+    @content;
+  }
+}
+
+@mixin no-js {
+  html:not(:global(.js)) & {
+    @content;
+  }
+}
+
+// gsap trans-in defaults
+@mixin will-animate($transform: true, $opacity: true) {
+
+  @include js-only {
+    @if $opacity == true {
+      opacity: 0;
+    }
+
+    @if $transform == true {
+      will-change: opacity, transform;
+    }
+
+    @else {
+      will-change: opacity;
+    }
+  }
+}
+
 @mixin hero {
   display: flex;
   align-items: center;
@@ -25,6 +160,10 @@
 
   @media (min-width: $min-mobile) {
     min-height: 500px;
+  }
+
+  @media (min-width: $min-tablet) {
+    min-height: 700px;
   }
 
   @media (min-width: $min-desktop) {
@@ -48,126 +187,28 @@
   }
 }
 
-@function strip-unit($number) {
-  @if type-of($number) == 'number' and not unitless($number) {
-    @return $number / ($number * 0 + 1);
-  }
-
-  @return $number;
-}
-
-@function lock($min-size, $size, $limit) {
+@function lock($min-size, $size, $page-limit) {
   $baseline: 375px;
 
-  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
+  $font-multiplier: (($size - $min-size) / (strip-unit($page-limit) - strip-unit($baseline)));
   $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
 
   @return calc(#{$font-multiplier} * #{100vw} + (#{$font-baseline}px));
 }
 
-// defaults to standard heading size
-@mixin responsive-font($min-size: 23, $size: 36, $limit: 1200px) {
-  $baseline: 375px;
-  $font-multiplier: (($size - $min-size) / (strip-unit($limit) - strip-unit($baseline)));
-  $font-baseline: ($min-size - $font-multiplier * strip-unit($baseline));
-
-  font-size: #{$min-size}px;
-
-  @media (min-width: $baseline) {
-    font-size: #{$min-size}px;
-    font-size: lock($min-size, $size, $limit);
-  }
-
-  @media (min-width: $limit) {
-    font-size: #{$size}px;
-  }
-}
-
-@mixin viewport($media) {
-  @if $media == handset {
-    @media only screen and (max-width: $max-tablet) { @content; }
-  }
-
-  @else if $media == tablet {
-    @media only screen and (min-width: $min-tablet) { @content; }
-  }
-
-  @else if $media == desktop {
-    @media only screen and (min-width: $min-desktop) { @content; }
-  }
-
-  /* stylelint-disable */
-  @else if $media == retina {
-    @media only screen and (-webkit-min-device-pixel-ratio: 1.3),
-      only screen and (-o-min-device-pixel-ratio: 13/10),
-      only screen and (min-resolution: 120dpi) {
-      @content;
-    }
-  }
-
-  @else if $media == oldIE {
-    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
-      @content;
-    }
-  }
-}
-
-// should be used only for Segment component; use 'section' for section spacing
-@mixin segment() {
-  position: relative;
-
-  padding: $segment-gutter-mobile 0 ($segment-gutter-mobile - $gutter);
-
-  @media (min-width: $min-tablet) {
-    padding: $segment-gutter-tablet 0 ($segment-gutter-tablet - $gutter);
-  }
-
-  @media (min-width: $min-desktop) {
-    padding: $segment-gutter-desktop 0 ($segment-gutter-desktop - $gutter);
-  }
-
-  @media (min-width: $min-1440) {
-    padding: ($segment-gutter-desktop * 1.75) 0 ($segment-gutter-desktop * 1.75 - $gutter);
-  }
-}
-
-@mixin container() {
-  margin: 0 auto;
-
-  padding-left: $container-gutter-mobile;
-  padding-right: $container-gutter-mobile;
-  max-width: $page-width + $container-gutter-mobile * 1;
-
-  @media (min-width: $min-340) {
-    max-width: $page-width + $container-gutter-mobile * 2;
-  }
-
-  @media (min-width: $min-tablet) {
-    padding-left: $container-gutter-tablet;
-    padding-right: $container-gutter-tablet;
-    max-width: $page-width + $container-gutter-tablet * 2;
-  }
-
-  @media (min-width: $min-desktop) {
-    padding-left: $container-gutter-desktop;
-    padding-right: $container-gutter-desktop;
-    max-width: $page-width + $container-gutter-desktop * 2;
-  }
-}
-
 // generic padding for each section based on PSD styles
-@mixin section {
-  padding-top: $gutter * 3;
-  padding-bottom: $gutter * 3;
+@mixin section($padding-top: $section-gutter, $padding-bottom: $section-gutter, $padding-top-mobile: $section-gutter-mobile, $padding-bottom-mobile: $section-gutter-mobile) {
+  padding-top: $padding-top-mobile;
+  padding-bottom: $padding-bottom-mobile;
 
   @media (min-width: $min-tablet) {
-    padding-top: percentage(200px / $limit);
-    padding-bottom: percentage(200px / $limit);
+    padding-top: percentage(strip-unit($padding-top) / strip-unit($page-limit));
+    padding-bottom: percentage(strip-unit($padding-bottom) / strip-unit($page-limit));
   }
 
-  @media (min-width: $limit) {
-    padding-top: 200px;
-    padding-bottom: 200px;
+  @media (min-width: $page-limit) {
+    padding-top: strip-unit($padding-top) * 1px;
+    padding-bottom: strip-unit($padding-bottom) * 1px;
   }
 }
 
@@ -203,7 +244,7 @@
       margin-right: -$container-gutter-desktop;
     }
 
-    @media (min-width: $page-width + $heroOffset - 50px ) {
+    @media (min-width: $page-width + $heroOffset - 50px) {
       margin-right: calc((100vw - #{$page-width}) / -2);
     }
 
@@ -240,17 +281,18 @@
 // Form element styling
 @mixin formElement {
   @include reset-input;
+  @include copy;
   @include placeholder(#4b4d53);
 
   display: block;
   position: relative;
-  z-index: 2;
+  z-index: $z-index-2;
 
   margin-bottom: $gutter;
   width: 100%;
   height: 40px;
 
-  color: #4b4d53;
+  color: #000;
 
   border: 0;
   background-color: transparent;
@@ -281,7 +323,7 @@
   @include reset-heading;
   @include responsive-font($min, $max);
 
-  margin-bottom: (5/52)*1em;
+  margin-bottom: (5/52) * 1em;
 
   font-family: $font-family-heading;
   font-weight: 200;
@@ -300,39 +342,40 @@
   letter-spacing: -0.035em;
   line-height: (58/52);
 
-  color: $font-color-subheading;
+  color: $color-subheading;
 }
 
 @mixin copy($min: 15, $max: 18) {
   @include reset-all;
   @include responsive-font($min,$max);
 
-  color: $font-color-content;
+  color: $color-content;
   letter-spacing: 0.025em;
   line-height: (28/18);
   font-weight: 200;
 }
 
-@mixin anchor($min: 14, $max: 14) {
+@mixin anchor($min: 13, $max: 14) {
   @include reset-anchor;
-  @include responsive-font($min,$max);
+  @include responsive-font($min, $max);
 
-  color: $font-color-dark;
+  color: $color-dark;
   text-transform: capitalize;
   letter-spacing: 0.02em;
   line-height: (20/14);
   font-weight: 700;
 }
 
-@mixin border($position: top) {
+// bordered section
+@mixin border($position: top, $color: $color-border) {
   position: relative;
 
   &::before {
     content: '';
 
     position: absolute;
-    left: $container-gutter-mobile / 2;
-    right: $container-gutter-mobile / 2;
+    left: $container-gutter-mobile;
+    right: $container-gutter-mobile;
 
     @if $position == 'bottom' {
       bottom: 0;
@@ -345,12 +388,7 @@
 
     max-width: $page-width;
     height: 1px;
-    background: $color-border;
-
-    @media (min-width: $min-340) {
-      left: $container-gutter-mobile;
-      right: $container-gutter-mobile;
-    }
+    background: $color;
 
     @media (min-width: $min-tablet) {
       left: $container-gutter-tablet;

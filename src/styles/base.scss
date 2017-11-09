@@ -2,11 +2,12 @@
 *  This file is imported in components/app-layout/AppLayout.scss
 */
 
-@-ms-viewport { // stylelint-disable-line
+/* stylelint-disable selector-max-type  */
+@-ms-viewport {
   width: device-width;
 }
 
-@-o-viewport { // stylelint-disable-line
+@-o-viewport {
   width: device-width;
 }
 
@@ -14,25 +15,38 @@
   width: device-width;
 }
 
-* {
-  box-sizing: border-box;
+:root {
+  --scale-multiplier: $scale;
+
+  // 805px is start of 15" Mac Book Pro range
+  @media (max-height: 805px) and (min-aspect-ratio: 16/10) {
+    --scale-multiplier: $scale-md;
+  }
+
+  // 650px is start of 13" Mac Book Pro with dock at bottom range
+  @media (max-height: 650px) and (min-aspect-ratio: 16/10) {
+    --scale-multiplier: $scale-sm;
+  }
 }
 
-:fullscreen a { // stylelint-disable-line
-  display: flex;
-}
-
-html, body { // stylelint-disable-line
+html,
+body {
   min-height: 100vh;
 
-  background: #fff;
+  background: $color-background;
 }
 
-html { // stylelint-disable-line
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   -webkit-overflow-scrolling: touch;
 
   overflow-x: hidden;
+  // always show the vertical scrollbar so that content doesn't jump
   overflow-y: scroll;
+
+  box-sizing: border-box;
 
   &.is-scroll-disabled { // stylelint-disable-line
     body { // stylelint-disable-line
@@ -42,7 +56,14 @@ html { // stylelint-disable-line
   }
 }
 
-body { // stylelint-disable-line
+// inherited from <html>
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
   position: relative;
 
   margin: 0;
@@ -50,17 +71,32 @@ body { // stylelint-disable-line
   font-family: $font-family;
   font-size: $font-size;
   line-height: $line-height;
-  color: $font-color;
+  color: $color-font;
 
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  -webkit-text-size-adjust: 100%; // stylelint-disable-line
-
-  overflow: hidden;
+  // iOS on orientation change
+  text-size-adjust: 100%;
 }
 
-img { // stylelint-disable-line
+img {
   display: block;
   max-width: 100%;
   height: auto;
+}
+
+// placeholders
+input,
+textarea,
+select {
+  &::-webkit-input-placeholder {
+    color: $color-placeholder;
+  }
+
+  &::-moz-placeholder {
+    opacity: 1;
+    color: $color-placeholder;
+  }
+
+  &:-ms-input-placeholder {
+    color: $color-placeholder;
+  }
 }

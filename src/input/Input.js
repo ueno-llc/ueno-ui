@@ -1,9 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classnames from 'classnames';
 
 import s from './Input.scss';
 
 export default class Input extends Component {
+
   static propTypes = {
     id: PropTypes.string,
     type: PropTypes.string,
@@ -14,6 +16,7 @@ export default class Input extends Component {
     onBlur: PropTypes.func,
     hasError: PropTypes.bool,
     className: PropTypes.string,
+    isSuccess: PropTypes.bool,
   };
 
   componentDidMount() {
@@ -33,16 +36,18 @@ export default class Input extends Component {
       autofocus,
       hasError,
       className,
+      isSuccess,
       ...other
     } = this.props;
 
     const classNames = classnames(s.input, className, {
       [s.error]: hasError,
+      [s.success]: isSuccess,
     });
 
     return (
       <input
-        ref={ref => this.input = ref}
+        ref={(ref) => { this.input = ref; }}
         id={id}
         className={classNames}
         type={type}

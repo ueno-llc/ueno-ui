@@ -1,27 +1,23 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
+
 import {
-  About,
   AboutDemo,
-  Button,
+  PopupDemo,
   Item,
   Image,
   Field,
   Input,
+  Select,
   Checkbox,
   Textarea,
   UenoButton,
+  Button,
 } from '../src';
 
-storiesOf('Button', module)
-  .add('with text', () => (
-    <Button onClick={action('clicked')}>Hello Button</Button>
-  ))
-  .add('with some emoji', () => (
-    <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
-  ));
+storiesOf('About', module).add('default', () => <AboutDemo />);
 
-storiesOf('About', module).add('default component', () => <AboutDemo />);
+storiesOf('Popup', module).add('default', () => <PopupDemo />);
 
 storiesOf('Ueno Button', module)
   .add('with text', () => (
@@ -113,4 +109,23 @@ storiesOf('Form', module)
       <Textarea hasError error />
     </Field>
   ))
+  .add('select', () => (
+    <Field label="Text" name="text">
+      <Select name="checkbox" label="checkbox">
+        <option defaultValue disabled>Default and disabled option</option>
+        <option>Other option 1</option>
+        <option>Other option 2</option>
+        <option>Other option 3</option>
+        <option>Other option 4</option>
+      </Select>
+    </Field>
+  ))
   .add('checkbox', () => <Checkbox name="checkbox" label="checkbox" />);
+
+storiesOf('Default button', module)
+  .add('with text', () => (
+    <Button onClick={action('clicked')}>Hello Button</Button>
+  ))
+  .add('with some emoji', () => (
+    <Button onClick={action('clicked')}>😀 😎 👍 💯</Button>
+  ));
