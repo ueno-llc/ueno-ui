@@ -29,8 +29,9 @@ export default class About extends Component {
       const first = this.close.querySelector(`.${s.about__svg}:first-child`);
       const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
-      t.addLabel('start')
-      .fromTo(
+      t.addLabel('start');
+
+      t.fromTo(
         this.about,
         0.45,
         { y: '-100%', ease },
@@ -64,15 +65,17 @@ export default class About extends Component {
         },
         0.075,
         'start+=.25',
-      )
-      .fromTo(
+      );
+
+      t.fromTo(
         first,
         0.3,
         { rotation: 0, ease },
         { rotation: 45 },
         'start+=.4',
-      )
-      .fromTo(
+      );
+
+      t.fromTo(
         last,
         0.3,
         { rotation: 0, ease },
@@ -113,14 +116,16 @@ export default class About extends Component {
         0.3,
         { rotation: 0, ease },
         'start+=.2',
-      )
-      .to(
+      );
+
+      t.to(
         last,
         0.3,
         { rotation: 0, ease },
         'start+=.2',
-      )
-      .call(cb);
+      );
+
+      t.call(cb);
     }
   }
 

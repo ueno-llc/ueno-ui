@@ -25,14 +25,11 @@ export default class Field extends Component {
       PropTypes.string,
     ]),
     className: PropTypes.string,
-  };
-
-  state = {
-    showLabel: false,
-  };
+  }
 
   componentDidMount() {
     const t = new TimelineLite();
+
     t.set(this.labelEl, { y: 10, opacity: 0 });
   }
 
@@ -52,12 +49,14 @@ export default class Field extends Component {
 
   showLabel() {
     const t = new TimelineLite();
+
     t.to(this.labelEl, 0.5, { y: 0, ease: 'Power4.easeOut' });
     t.to(this.labelEl, 0.5, { opacity: 1 }, '-=0.5');
   }
 
   hideLabel() {
     const t = new TimelineLite();
+
     t.to(this.labelEl, 0.2, { y: 10, ease: 'Power4.easeOut' });
     t.to(this.labelEl, 0.2, { opacity: 0 }, '-=0.2');
   }
@@ -83,24 +82,24 @@ export default class Field extends Component {
       </div>
     );
 
-    const fields = childs.filter(c =>
+    const fields = childs.filter(c => (
       c.type === inputType ||
       c.type === selectType ||
-      c.type === textareaType,
-    );
+      c.type === textareaType
+    ));
 
-    const rest = childs.filter(c =>
+    const rest = childs.filter(c => (
       c.type !== inputType &&
       c.type !== selectType &&
-      c.type !== textareaType,
-    );
+      c.type !== textareaType
+    ));
 
     return (
       <div className={classnames(s.field, className)}>
         {errorBlock}
         {successBlock}
 
-        <label
+        <label // eslint-disable-line jsx-a11y/label-has-for
           htmlFor={id}
           className={s.field__label}
           ref={(ref) => { this.labelEl = ref; }}

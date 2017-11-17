@@ -34,6 +34,7 @@ export default class Popup extends Component {
 
   onChange = (e) => {
     const email = e.target.value;
+
     this.setState({ email });
   }
 
@@ -75,19 +76,22 @@ export default class Popup extends Component {
       const items = this.content.querySelectorAll('h2 , h3, form div');
       const ease = 'Power4.easeInOut';
 
-      t.addLabel('start')
-      .set(
+      t.addLabel('start');
+
+      t.set(
         this.cross,
         { opacity: 0 },
-      )
-      .fromTo(
+      );
+
+      t.fromTo(
         this.overlay,
         0.8,
         { opacity: 0, ease },
         { opacity: 1 },
         'start',
-      )
-      .fromTo(
+      );
+
+      t.fromTo(
         this.popup,
         0.8,
         {
@@ -103,8 +107,9 @@ export default class Popup extends Component {
           y: '0%',
         },
         'start+=.33',
-      )
-      .staggerFromTo(
+      );
+
+      t.staggerFromTo(
         items,
         0.55,
         {
@@ -118,8 +123,9 @@ export default class Popup extends Component {
         },
         0.075,
         'start+=.66',
-      )
-      .fromTo(
+      );
+
+      t.fromTo(
         this.cross,
         0.7,
         {
@@ -137,14 +143,16 @@ export default class Popup extends Component {
       const t = new TimelineLite();
       const ease = 'Power4.easeInOut';
 
-      t.addLabel('start')
-      .to(
+      t.addLabel('start');
+
+      t.to(
         this.overlay,
         0.4,
         { opacity: 0, ease },
         'start',
-      )
-      .to(
+      );
+
+      t.to(
         this.popup,
         0.4,
         {
@@ -153,8 +161,9 @@ export default class Popup extends Component {
           ease,
         },
         'start',
-      )
-      .call(() => {
+      );
+
+      t.call(() => {
         cb();
         clearTimeout(this.hidePopup);
       });

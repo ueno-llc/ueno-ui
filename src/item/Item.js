@@ -126,9 +126,9 @@ export default class Item extends Component {
             <h3 className={s.item__heading}>{name}</h3>
 
             <ul className={s.item__typelist}>
-              {tags.map(tag =>
-                <li className={s.item__type} key={`tag-${tag}`}>{tag}</li>,
-              )}
+              {tags.map(tag => (
+                <li className={s.item__type} key={`tag-${tag}`}>{tag}</li>
+              ))}
             </ul>
           </div>
         )}

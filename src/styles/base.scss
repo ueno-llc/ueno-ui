@@ -1,8 +1,4 @@
-/***
-*  This file is imported in components/app-layout/AppLayout.scss
-*/
-
-/* stylelint-disable selector-max-type  */
+/* stylelint-disable selector-max-type, selector-no-qualifying-type */
 @-ms-viewport {
   width: device-width;
 }
@@ -37,19 +33,17 @@ body {
 }
 
 html {
+  overflow-x: hidden;
+  overflow-y: scroll; // always show the vertical scrollbar so that content doesn't jump
+
+  -webkit-overflow-scrolling: touch;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  -webkit-overflow-scrolling: touch;
-
-  overflow-x: hidden;
-  // always show the vertical scrollbar so that content doesn't jump
-  overflow-y: scroll;
-
   box-sizing: border-box;
 
-  &.is-scroll-disabled { // stylelint-disable-line
-    body { // stylelint-disable-line
+  &.is-scroll-disabled {
+    body {
       height: 100vh;
       overflow: hidden;
     }

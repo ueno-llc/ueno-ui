@@ -56,6 +56,7 @@ export default class Image extends Component {
 
     return Object.keys(src).map((k) => {
       const size = k.slice(3) || '1x';
+
       return `${src[k]} ${size}`;
     }).join(', ');
   };

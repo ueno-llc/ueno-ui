@@ -25,7 +25,7 @@ export default class NotFound extends Component {
 
     const videoBlock = (
       <div className={s.intro__videoContainer}>
-        <video
+        <video // eslint-disable-line jsx-a11y/media-has-caption
           className={s.intro__videoSource}
           src={video}
           autoPlay
