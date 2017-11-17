@@ -31,6 +31,7 @@ class ArrowRight extends PureComponent {
 }
 
 class ArrowSubmit extends PureComponent {
+
   static propTypes = {
     className: PropTypes.string,
   };
@@ -58,6 +59,7 @@ class ArrowSubmit extends PureComponent {
 }
 
 class Cross extends PureComponent {
+
   static propTypes = {
     className: PropTypes.string,
   };
@@ -84,4 +86,8 @@ class Cross extends PureComponent {
   }
 }
 
-export { ArrowRight, ArrowSubmit, Cross };
+export {
+  ArrowRight,
+  ArrowSubmit,
+  Cross,
+};

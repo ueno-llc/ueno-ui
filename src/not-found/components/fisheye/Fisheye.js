@@ -15,6 +15,7 @@ export default class Fisheye extends Component {
 
   componentDidMount() {
     const consoleLog = console.log; // eslint-disable-line no-console
+
     console.log = (first, ...args) => (first !== 'THREE.WebGLRenderer') && consoleLog.call(console, first, ...args); // eslint-disable-line no-console
 
     // Setup constructors
@@ -89,7 +90,7 @@ export default class Fisheye extends Component {
 
   render() {
     return (
-      <div className={s.fisheye} ref={ref => (this.canvasWrapper = ref)} />
+      <div className={s.fisheye} ref={(ref) => { this.canvasWrapper = ref; }} />
     );
   }
 }
