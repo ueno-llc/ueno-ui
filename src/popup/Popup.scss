@@ -50,11 +50,11 @@
   &__content {
     position: relative;
 
+    overflow: hidden;
+
     background-color: #fff;
 
     box-shadow: 0 50px 62px 0 rgba(0, 0, 0, 0.25);
-
-    overflow: hidden;
 
     transform: translateY(300%) scale(0.6);
     transform-style: preserve-3d;
