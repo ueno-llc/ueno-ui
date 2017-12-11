@@ -1,12 +1,14 @@
 {
   "presets": [
     ["env", { "targets": { "node": true } }],
+    "es2015",
     "react",
     "stage-0"
   ],
   "env": {
     "commonjs": {
       "presets": [
+        "es2015",
         "react",
         "stage-0"
       ],
@@ -21,6 +23,7 @@
     },
     "commonjs-dev": {
       "presets": [
+        "es2015",
         "react",
         "stage-0"
       ],
@@ -35,6 +38,7 @@
     },
     "umd": {
       "presets": [
+        "es2015",
         "react",
         "stage-0"
       ],
