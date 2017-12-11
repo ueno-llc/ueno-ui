@@ -49,7 +49,7 @@
     ],
     "setupFiles": [
       "<rootDir>/tools/jest/rafShim.js",
-      "<rootDir>/src/setupTests.js"
+      "<rootDir>/setupTests.js"
     ]
   },
   "devDependencies": {

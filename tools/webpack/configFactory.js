@@ -68,7 +68,7 @@ function webpackConfigFactory({ target }) {
             ...ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
-                'css-loader?modules=1&importLoaders=1&localIdentName=[hash:base64:16]',
+                'css-loader?modules=1&localIdentName=[hash:base64:16]',
                 'postcss-loader',
                 'sass-loader?outputStyle=expanded',
               ],
