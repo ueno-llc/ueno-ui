@@ -1,10 +1,22 @@
 # ueno-ui
 
-## How to extend css of components
+## Super simple example
 
 ```js
-import React, { Component } from 'react';
-import { Button } from 'ueno-ui';
+import React from 'react';
+import { UenoButton } from 'ueno-ui';
+
+const Example = () => <UenoButton to="https://ueno.co">Ueno button</UenoButton>;
+```
+
+## How to extend css of components
+
+Most of our components has a `className` props where you can pass customs styles. For example `<UenoButton />`, `<Input />` or also `<Field />` have a `className` props.
+We need to display them differently through our projects so we keep components' styles in the ui here, and we take care of the positionning on the project itself with the `className`.
+
+```js
+import React from 'react';
+import { UenoButton } from 'ueno-ui';
 
 import s from 'styles/overwrite-button.scss';
 
@@ -13,12 +25,7 @@ import s from 'styles/overwrite-button.scss';
 //   font-size: 50px;
 // }
 
-const Example = () => (
-  <div>
-    <Button>My button</Button>
-    <Button styles={s.button}>My custom button</Button>
-  </div>
-);
+const Example = () => <UenoButton to="https://ueno.co" className={s.button}>Ueno button with some custom styles</UenoButton>;
 ```
 
 ## Development

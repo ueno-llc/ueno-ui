@@ -1,15 +1,16 @@
 {
   "presets": [
     ["env", { "targets": { "node": true } }],
+    "es2015",
     "react",
-    "stage-1"
+    "stage-0"
   ],
   "env": {
     "commonjs": {
       "presets": [
-        "latest",
+        "es2015",
         "react",
-        "stage-1"
+        "stage-0"
       ],
       "plugins": [
         ["css-modules-transform", {
@@ -22,9 +23,9 @@
     },
     "commonjs-dev": {
       "presets": [
-        "latest",
+        "es2015",
         "react",
-        "stage-1"
+        "stage-0"
       ],
       "plugins": [
         ["css-modules-transform", {
@@ -37,9 +38,9 @@
     },
     "umd": {
       "presets": [
-        ["latest", { "es2015": { "modules": false } }],
+        "es2015",
         "react",
-        "stage-1"
+        "stage-0"
       ],
     }
   }

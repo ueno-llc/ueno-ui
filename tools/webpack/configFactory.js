@@ -59,20 +59,22 @@ function webpackConfigFactory({ target }) {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          include: [resolvePath(appRootDir.get(), './src')],
+          include: resolvePath(appRootDir.get(), './src'),
         },
         {
-          test: /\.css|\.scss|\.sass$/,
+          test: /\.css|\.scss$/,
+          include: resolvePath(appRootDir.get(), './src'),
           use: [
             ...ExtractTextPlugin.extract({
               fallback: 'style-loader',
               use: [
                 'css-loader?modules=1&localIdentName=[hash:base64:16]',
+                'postcss-loader',
                 'sass-loader?outputStyle=expanded',
               ],
             }),
           ],
-        },
+        }
       ],
     },
   };
