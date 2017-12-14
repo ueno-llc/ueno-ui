@@ -59,11 +59,11 @@ function webpackConfigFactory({ target }) {
         {
           test: /\.js$/,
           loader: 'babel-loader',
-          include: [resolvePath(appRootDir.get(), './src')],
+          include: resolvePath(appRootDir.get(), './src'),
         },
         {
-          test: /\.css|\.scss|\.sass$/,
-          include: [resolvePath(appRootDir.get(), './src')],
+          test: /\.css|\.scss$/,
+          include: resolvePath(appRootDir.get(), './src'),
           use: [
             ...ExtractTextPlugin.extract({
               fallback: 'style-loader',
