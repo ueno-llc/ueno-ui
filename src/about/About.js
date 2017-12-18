@@ -21,15 +21,16 @@ export default class About extends Component {
   }
 
   endHandler = (node, done) => {
+    const t = new TimelineLite();
+    const main = document.querySelector('#main-app');
+    const first = this.close.querySelector(`.${s.about__svg}:first-child`);
+    const last = this.close.querySelector(`.${s.about__svg}:last-child`);
+
     if (this.props.in && this.about) {
-      const t = new TimelineLite();
       const ease = 'Power4.easeOut';
-      const main = document.querySelector('#main-app');
       const height = this.about.offsetHeight;
       const mainHeight = main.offsetHeight;
       const content = this.about.querySelectorAll(`.${s.about__inner} > *`);
-      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
-      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start');
 
@@ -87,11 +88,7 @@ export default class About extends Component {
 
       done();
     } else if (this.about) {
-      const t = new TimelineLite();
       const ease = 'Power4.easeInOut';
-      const main = document.querySelector('#main-app');
-      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
-      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start');
 

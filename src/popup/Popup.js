@@ -65,10 +65,11 @@ export default class Popup extends Component {
   }
 
   endHandler = (node, done) => {
+    const t = new TimelineLite();
+    const ease = 'Power4.easeInOut';
+
     if (this.props.in && this.overlay && this.popup) {
-      const t = new TimelineLite();
       const items = this.content.querySelectorAll('h2 , h3, form div');
-      const ease = 'Power4.easeInOut';
 
       t.addLabel('start');
 
@@ -130,9 +131,6 @@ export default class Popup extends Component {
         'start+=1.2',
       );
     } else if (this.overlay && this.popup) {
-      const t = new TimelineLite();
-      const ease = 'Power4.easeInOut';
-
       t.addLabel('start');
 
       t.to(
