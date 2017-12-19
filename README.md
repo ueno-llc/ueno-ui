@@ -2,9 +2,9 @@
 
 > **ATTENTION!** Breaking changes
 >
-> The `ueno-ui@v2.1.0` use the new v2 api of [react-transition-group](https://github.com/reactjs/react-transition-group). If your project use the `react-transition-group@1.x.x`, ueno-ui won't work, since the two API are complety different.
+> The `ueno-ui@2.x.x` use the new v2 api of [react-transition-group](https://github.com/reactjs/react-transition-group). If your project use the `react-transition-group@1.x.x`, ueno-ui won't work, since the two API are complety different.
 >
-> **You will have to upgrade your project with the latest version of `react-transition-group@2.x.x`, or use `ueno-ui@2.0.0` that still use the old `react-transition-group@1.1.3` api.**
+> **You will have to upgrade your project with the latest version of `react-transition-group@2.x.x`, or use `ueno-ui@1.x.x` that still use the old `react-transition-group@1.1.3` api.**
 
 ## Super simple example
 
