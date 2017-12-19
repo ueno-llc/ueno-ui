@@ -3,6 +3,7 @@ import 'gsap/CSSPlugin';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TimelineLite from 'gsap/TimelineLite';
+import { Transition } from 'react-transition-group';
 
 import UenoButton from '../ueno-button/UenoButton';
 import Field from '../field/Field';
@@ -26,7 +27,8 @@ export default class Popup extends Component {
       PropTypes.string,
     ]),
     reset: PropTypes.func,
-  };
+    in: PropTypes.bool,
+  }
 
   state = {
     email: undefined,
@@ -46,10 +48,6 @@ export default class Popup extends Component {
     e.preventDefault();
   }
 
-  componentDidAppear() {
-    this.animateIn();
-  }
-
   componentWillReceiveProps(nextProps) {
     const { onClose, reset } = this.props;
     const res = nextProps.response;
@@ -66,15 +64,12 @@ export default class Popup extends Component {
     clearTimeout(this.hidePopup);
   }
 
-  componentDidEnter() {
-    this.animateIn();
-  }
+  endHandler = (node, done) => {
+    const t = new TimelineLite();
+    const ease = 'Power4.easeInOut';
 
-  animateIn() {
-    if (this.overlay && this.popup) {
-      const t = new TimelineLite();
+    if (this.props.in && this.overlay && this.popup) {
       const items = this.content.querySelectorAll('h2 , h3, form div');
-      const ease = 'Power4.easeInOut';
 
       t.addLabel('start');
 
@@ -135,14 +130,7 @@ export default class Popup extends Component {
         { opacity: 1 },
         'start+=1.2',
       );
-    }
-  }
-
-  componentWillLeave(cb) {
-    if (this.overlay && this.popup) {
-      const t = new TimelineLite();
-      const ease = 'Power4.easeInOut';
-
+    } else if (this.overlay && this.popup) {
       t.addLabel('start');
 
       t.to(
@@ -164,7 +152,7 @@ export default class Popup extends Component {
       );
 
       t.call(() => {
-        cb();
+        done();
         clearTimeout(this.hidePopup);
       });
     }
@@ -185,60 +173,63 @@ export default class Popup extends Component {
       onClose,
       response,
       hasError,
+      ...props
     } = this.props;
 
     const hasResponse = response && response.status === 'subscribed';
     const isSuccess = hasResponse && 'Subscribed!';
 
     return (
-      <div // eslint-disable-line
-        className={s.popup}
-        onClick={this.closeUnlessClickedOnContent}
-      >
-        <div className={s.popup__overlay} ref={(c) => { this.overlay = c; }} />
+      <Transition addEndListener={this.endHandler} {...props}>
+        <div // eslint-disable-line
+          className={s.popup}
+          onClick={this.closeUnlessClickedOnContent}
+        >
+          <div className={s.popup__overlay} ref={(c) => { this.overlay = c; }} />
 
-        <div className={s.popup__wrapper}>
-          <div className={s.popup__row}>
-            <div className={s.popup__inner}>
-              <div className={s.popup__content} ref={(c) => { this.popup = c; }}>
-                <div className={s.popup__animatedInside} ref={(c) => { this.content = c; }}>
-                  <div ref={(c) => { this.cross = c; }}>
-                    <Cross className={s.popup__cross} onClose={onClose} />
-                  </div>
-
-                  <h2 className={s.popup__heading}>{heading}</h2>
-                  <h3 className={s.popup__subheading}>{subheading}</h3>
-
-                  <form
-                    method="POST"
-                    onSubmit={this.onSubmit}
-                    action="/api/mailchimp/subscribe"
-                  >
-                    <Field
-                      label={placeholder}
-                      name="email"
-                      error={hasError}
-                      success={isSuccess}
-                    >
-                      <Input
-                        onChange={this.onChange}
-                        type="text"
-                        required
-                        hasError={Boolean(hasError)}
-                        isSuccess={Boolean(isSuccess)}
-                      />
-                    </Field>
-
-                    <div className={s.popup__submit}>
-                      <UenoButton type="submit">{actionText}</UenoButton>
+          <div className={s.popup__wrapper}>
+            <div className={s.popup__row}>
+              <div className={s.popup__inner}>
+                <div className={s.popup__content} ref={(c) => { this.popup = c; }}>
+                  <div className={s.popup__animatedInside} ref={(c) => { this.content = c; }}>
+                    <div ref={(c) => { this.cross = c; }}>
+                      <Cross className={s.popup__cross} onClose={onClose} />
                     </div>
-                  </form>
+
+                    <h2 className={s.popup__heading}>{heading}</h2>
+                    <h3 className={s.popup__subheading}>{subheading}</h3>
+
+                    <form
+                      method="POST"
+                      onSubmit={this.onSubmit}
+                      action="/api/mailchimp/subscribe"
+                    >
+                      <Field
+                        label={placeholder}
+                        name="email"
+                        error={hasError}
+                        success={isSuccess}
+                      >
+                        <Input
+                          onChange={this.onChange}
+                          type="text"
+                          required
+                          hasError={Boolean(hasError)}
+                          isSuccess={Boolean(isSuccess)}
+                        />
+                      </Field>
+
+                      <div className={s.popup__submit}>
+                        <UenoButton type="submit">{actionText}</UenoButton>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Transition>
     );
   }
 }

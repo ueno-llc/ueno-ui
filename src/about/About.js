@@ -3,6 +3,7 @@ import 'gsap/CSSPlugin';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import TimelineLite from 'gsap/TimelineLite';
+import { Transition } from 'react-transition-group';
 
 import Button from '../ueno-button/UenoButton';
 
@@ -16,18 +17,20 @@ export default class About extends Component {
     onClose: PropTypes.func,
     actionText: PropTypes.string,
     to: PropTypes.string,
-  };
+    in: PropTypes.bool,
+  }
 
-  componentWillEnter(cb) {
-    if (this.about) {
-      const t = new TimelineLite();
+  endHandler = (node, done) => {
+    const t = new TimelineLite();
+    const main = document.querySelector('#main-app');
+    const first = this.close.querySelector(`.${s.about__svg}:first-child`);
+    const last = this.close.querySelector(`.${s.about__svg}:last-child`);
+
+    if (this.props.in && this.about) {
       const ease = 'Power4.easeOut';
-      const main = document.querySelector('#main-app');
       const height = this.about.offsetHeight;
       const mainHeight = main.offsetHeight;
       const content = this.about.querySelectorAll(`.${s.about__inner} > *`);
-      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
-      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start');
 
@@ -82,18 +85,10 @@ export default class About extends Component {
         { rotation: -45 },
         'start+=.4',
       );
-    }
 
-    cb();
-  }
-
-  componentWillLeave(cb) {
-    if (this.about) {
-      const t = new TimelineLite();
+      done();
+    } else if (this.about) {
       const ease = 'Power4.easeInOut';
-      const main = document.querySelector('#main-app');
-      const first = this.close.querySelector(`.${s.about__svg}:first-child`);
-      const last = this.close.querySelector(`.${s.about__svg}:last-child`);
 
       t.addLabel('start');
 
@@ -125,45 +120,44 @@ export default class About extends Component {
         'start+=.2',
       );
 
-      t.call(cb);
+      t.call(done);
     }
   }
 
   render() {
-    const { copy, onClose, actionText, to } = this.props;
+    const { copy, onClose, actionText, to, ...props } = this.props;
 
     return (
-      <div
-        className={s.about}
-        ref={(c) => { this.about = c; }}
-      >
-        <div className={s.about__wrapper}>
-          <div className={s.about__col}>
-            <div className={s.about__content}>
-              <div className={s.about__inner}>
-                <button
-                  className={s.about__cross}
-                  onClick={onClose}
-                  ref={(c) => { this.close = c; }}
-                >
-                  <Line className={s.about__svg} />
-                  <Line className={s.about__svg} />
-                </button>
+      <Transition addEndListener={this.endHandler} {...props}>
+        <div className={s.about} ref={(c) => { this.about = c; }}>
+          <div className={s.about__wrapper}>
+            <div className={s.about__col}>
+              <div className={s.about__content}>
+                <div className={s.about__inner}>
+                  <button
+                    className={s.about__cross}
+                    onClick={onClose}
+                    ref={(c) => { this.close = c; }}
+                  >
+                    <Line className={s.about__svg} />
+                    <Line className={s.about__svg} />
+                  </button>
 
-                <p className={s.about__copy}>
-                  {copy}
-                </p>
+                  <p className={s.about__copy}>
+                    {copy}
+                  </p>
 
-                <div className={s.about__button}>
-                  <Button href={to}>
-                    {actionText}
-                  </Button>
+                  <div className={s.about__button}>
+                    <Button href={to}>
+                      {actionText}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </Transition>
     );
   }
 }
