@@ -52,7 +52,7 @@ export default class Popup extends Component {
     const { onClose, reset } = this.props;
     const res = nextProps.response;
 
-    if (res && res.status === 'subscribed') {
+    if (res && res.ok) {
       this.hidePopup = setTimeout(() => {
         reset();
         onClose();
@@ -176,7 +176,7 @@ export default class Popup extends Component {
       ...props
     } = this.props;
 
-    const hasResponse = response && response.status === 'subscribed';
+    const hasResponse = response && response.ok;
     const isSuccess = hasResponse && 'Subscribed!';
 
     return (
@@ -202,7 +202,6 @@ export default class Popup extends Component {
                     <form
                       method="POST"
                       onSubmit={this.onSubmit}
-                      action="/api/mailchimp/subscribe"
                     >
                       <Field
                         label={placeholder}
