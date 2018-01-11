@@ -173,6 +173,8 @@ export default class Popup extends Component {
       onClose,
       response,
       hasError,
+      sendEmail, // eslint-disable-line
+      reset, // eslint-disable-line
       ...props
     } = this.props;
 
