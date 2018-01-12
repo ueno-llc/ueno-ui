@@ -64,11 +64,11 @@ export default class Popup extends Component {
     clearTimeout(this.hidePopup);
   }
 
-  endHandler = (node, done) => {
+  componentWillEnter(cb) {
     const t = new TimelineLite();
     const ease = 'Power4.easeInOut';
 
-    if (this.props.in && this.overlay && this.popup) {
+    if (this.overlay && this.popup) {
       const items = this.content.querySelectorAll('h2 , h3, form div');
 
       t.addLabel('start');
@@ -130,7 +130,16 @@ export default class Popup extends Component {
         { opacity: 1 },
         'start+=1.2',
       );
-    } else if (this.overlay && this.popup) {
+
+      t.call(cb);
+    }
+  }
+
+  componentWillLeave(cb) {
+    const t = new TimelineLite();
+    const ease = 'Power4.easeInOut';
+
+    if (this.overlay && this.popup) {
       t.addLabel('start');
 
       t.to(
@@ -152,9 +161,17 @@ export default class Popup extends Component {
       );
 
       t.call(() => {
-        done();
+        cb();
         clearTimeout(this.hidePopup);
       });
+    }
+  }
+
+  transitionHandler = (node, cb) => {
+    if (this.props.in) {
+      this.componentWillEnter(cb);
+    } else {
+      this.componentWillLeave(cb);
     }
   }
 
@@ -182,7 +199,11 @@ export default class Popup extends Component {
     const isSuccess = hasResponse && 'Subscribed!';
 
     return (
-      <Transition addEndListener={this.endHandler} {...props}>
+      <Transition
+        {...props}
+        appear
+        addEndListener={this.transitionHandler}
+      >
         <div // eslint-disable-line
           className={s.popup}
           onClick={this.closeUnlessClickedOnContent}
