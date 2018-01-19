@@ -8,16 +8,16 @@ import Fisheye from './components/fisheye/Fisheye';
 export default class NotFound extends Component {
 
   static propTypes = {
-    ui: PropTypes.object,
+    random: PropTypes.number,
     src: PropTypes.string,
-  };
+  }
 
   render() {
-    const { ui, src } = this.props;
+    const { random, src } = this.props;
 
     return (
       <div>
-        <Intro heading="404" ui={ui}>
+        <Intro heading="404" random={random}>
           <Variation
             subheading="Wait, what?"
             text="Why did the hot dog cross the road? Why did the priest

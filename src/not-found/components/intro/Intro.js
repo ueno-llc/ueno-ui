@@ -10,18 +10,12 @@ export default class NotFound extends Component {
     heading: PropTypes.string,
     children: PropTypes.node,
     video: PropTypes.string,
-    ui: PropTypes.object,
-  };
-
-  componentWillMount() {
-    const { ui } = this.props;
-
-    this.random = ui.serverSharedRandom;
+    random: PropTypes.number,
   }
 
   render() {
-    const { heading, children, video, ui } = this.props;
-    const random = Math.floor(this.random * children.length);
+    const { heading, children, video, random } = this.props;
+    const index = Math.floor(random * children.length);
 
     const videoBlock = (
       <div className={s.intro__videoContainer}>
@@ -38,10 +32,10 @@ export default class NotFound extends Component {
 
     return (
       <section className={s.intro}>
-        <div className={classnames(s.intro__content, { [s.intro__contentMobile]: ui.isMobile })}>
+        <div className={s.intro__content}>
           <div className={s.intro__inner}>
             <h1 className={s.intro__heading}>{heading}</h1>
-            {children[random]}
+            {children[index]}
           </div>
         </div>
 
