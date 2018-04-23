@@ -109,6 +109,7 @@ $scale-sm: 0.8;
 $min-affix: $min-960;
 
 // z-indices stack order
+$z-index-negative: -1;
 $z-index-0: 0;
 $z-index-1: 1;
 $z-index-2: 2;
@@ -120,3 +121,4 @@ $z-index-12: 12;
 $z-index-13: 13;
 
 $z-index-100: 100; // popups & modals
+$z-index-101: 101; // transition slide
