@@ -23,8 +23,8 @@
     display: flex;
 
     position: absolute;
-    bottom: 2px;
-    right: 0;
+    top: 100%;
+    left: 0;
     z-index: $z-index-3;
   }
 
@@ -38,6 +38,7 @@
   }
 
   &__error {
+    padding: 8px 8px 8px 0;
     color: $color-error;
   }
 
