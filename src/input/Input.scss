@@ -2,6 +2,10 @@
 
 .input {
   @include formElement;
+
+  &:focus[type=email] {
+    text-transform: lowercase;
+  }
 }
 
 .error:not(:focus) {
