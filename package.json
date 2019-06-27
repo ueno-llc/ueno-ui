@@ -19,19 +19,19 @@
     "ui components"
   ],
   "scripts": {
-    "build": "yarn clear && babel-node ./tools/scripts/build.js",
+    "dev": "yarn clear && babel-node ./tools/scripts/build.js",
+    "start": "start-storybook -p 6006",
     "check": "yarn run test",
     "clear": "rimraf ./commonjs && rimraf ./umd && rimraf ./coverage && rimraf ./styles.css",
     "eslint": "eslint src",
     "stylelint": "stylelint \"src/**/*.scss\" --syntax scss",
     "lint": "npm run eslint -q; npm run stylelint -q",
     "precommit": "npm run test",
-    "prepublish": "NODE_ENV=production yarn run build",
+    "prepublish": "NODE_ENV=production yarn run dev",
     "test": "jest",
     "test:coverage": "yarn run test -- --coverage",
     "test:coverage:deploy": "yarn run test:coverage && codecov",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build": "build-storybook -c .storybook -o public"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -81,13 +81,13 @@
     "identity-obj-proxy": "3.0.0",
     "in-publish": "2.0.0",
     "jest": "21.2.1",
-    "node-sass": "4.5.3",
+    "node-sass": "4.11.0",
     "postcss-csso": "2.0.0",
     "postcss-loader": "2.0.9",
     "pretty-bytes": "4.0.2",
     "ramda": "0.23.0",
     "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react-dom": "16.2.1",
     "readline-sync": "1.4.7",
     "rimraf": "2.6.1",
     "sass-loader": "6.0.6",
