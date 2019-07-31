@@ -12,10 +12,10 @@ $page-width: 1290px;
 $page-limit: $page-width + ($container-gutter-desktop * 2);
 
 // Fonts
-$font-family-tisa: 'Tisa Pro', sans-serif;
-$font-family-akagi: 'Akagi Pro', sans-serif;
-$font-family: $font-family-akagi;
-$font-family-heading: $font-family-tisa;
+$font-family-ibm: 'IBM Plex Serif', sans-serif;
+$font-family-national: 'National 2', sans-serif;
+$font-family: $font-family-national;
+$font-family-heading: $font-family-ibm;
 $font-size: 16px;
 $line-height: 1.5;
 
