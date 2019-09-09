@@ -86,8 +86,36 @@ class Cross extends PureComponent {
   }
 }
 
+class Paperclip extends PureComponent {
+
+  static propTypes = {
+    className: PropTypes.string,
+  };
+
+  render() {
+    const { className } = this.props;
+
+    return (
+      <svg
+        className={className}
+        data-type="paperclip"
+        viewBox="0 0 37 100"
+      >
+        <path
+          d="M35 26v54c0 5.5-2 18-16 18A16.56 16.56 0 0 1 2 81V13C2 9.5 5 2 13 2a11.64 11.64 0 0 1 12 11v52s0 7-7 7-6-7-6-7V39"
+          fill="none"
+          stroke="#999"
+          strokeMiterlimit="10"
+          strokeWidth="4"
+        />
+      </svg>
+    );
+  }
+}
+
 export {
   ArrowRight,
   ArrowSubmit,
   Cross,
+  Paperclip,
 };

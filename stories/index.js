@@ -14,6 +14,7 @@ import {
   Textarea,
   UenoButton,
   Button,
+  FileInput,
 } from '../src';
 
 storiesOf('About', module).add('default', () => <AboutDemo />);
@@ -108,6 +109,11 @@ storiesOf('Form', module)
   .add('textarea with error', () => (
     <Field label="Text" name="text" error="Text missing">
       <Textarea hasError error />
+    </Field>
+  ))
+  .add('fileinput', () => (
+    <Field label="Add attachment" name="attachment">
+      <FileInput />
     </Field>
   ))
   .add('select', () => (

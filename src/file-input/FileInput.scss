@@ -1,0 +1,45 @@
+@import '../styles/config';
+
+.files {
+  @include formElement;
+  position: relative;
+  width: 100%;
+  height: 40px;
+
+  &__label {
+    @include copy;
+
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    padding-right: 15px;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #000;
+    cursor: pointer;
+  }
+
+  &__input {
+    position: absolute;
+    z-index: $z-index-negative;
+
+    opacity: 0.00001;
+    color: #fff;
+    pointer-events: none;
+
+    resize: none;
+  }
+
+  &__paperclip {
+
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+
+    height: 50%;
+  }
+}

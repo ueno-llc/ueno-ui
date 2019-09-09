@@ -4,6 +4,7 @@ import Button from './button/Button';
 import Item from './item/Item';
 import Image from './image/Image';
 import Input from './input/Input';
+import FileInput from './file-input/FileInput';
 import Select from './select/Select';
 import Checkbox from './checkbox/Checkbox';
 import Field from './field/Field';
@@ -23,6 +24,7 @@ export {
   Image,
   Item,
   Input,
+  FileInput,
   Select,
   Checkbox,
   Field,

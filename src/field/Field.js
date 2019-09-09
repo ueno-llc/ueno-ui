@@ -4,6 +4,7 @@ import TimelineLite from 'gsap/TimelineLite';
 import classnames from 'classnames';
 
 import Input from '../input/Input';
+import FileInput from '../file-input/FileInput';
 import Select from '../select/Select';
 import Textarea from '../textarea/Textarea';
 import { ArrowSubmit } from '../icons/Icons';
@@ -33,7 +34,7 @@ export default class Field extends Component {
     t.set(this.labelEl, { y: 10, opacity: 0 });
   }
 
-  onChange = onChangeOld => e => onChangeOld(e);
+  onChange = onChangeOld => e => onChangeOld && onChangeOld(e);
 
   onFocus = () => {
     this.showLabel();
@@ -67,6 +68,7 @@ export default class Field extends Component {
     const inputType = <Input />.type;
     const selectType = (<Select />).type;
     const textareaType = <Textarea />.type;
+    const fileInputType = <FileInput />.type;
     const childs = React.Children.toArray(children);
     const isSelect = Boolean(childs.filter(c => c.type === selectType).length);
 
@@ -85,12 +87,14 @@ export default class Field extends Component {
     const fields = childs.filter(c => (
       c.type === inputType ||
       c.type === selectType ||
+      c.type === fileInputType ||
       c.type === textareaType
     ));
 
     const rest = childs.filter(c => (
       c.type !== inputType &&
       c.type !== selectType &&
+      c.type !== fileInputType &&
       c.type !== textareaType
     ));
 
@@ -130,6 +134,12 @@ export default class Field extends Component {
             opts.onChange = this.onChange(c.props.onChange);
             opts.onFocus = this.onFocus;
             opts.onBlur = this.onBlur;
+          }
+
+          if (c.type === fileInputType) {
+            opts.onChange = this.onChange(c.props.onChange);
+            opts.onFocus = this.onFocus;
+            opts.onBlur = () => this.hideLabel();
           }
 
           return React.cloneElement(c, opts);
