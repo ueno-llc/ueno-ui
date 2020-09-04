@@ -81,7 +81,7 @@
     "identity-obj-proxy": "3.0.0",
     "in-publish": "2.0.0",
     "jest": "21.2.1",
-    "node-sass": "4.11.0",
+    "node-sass": "4.13.1",
     "postcss-csso": "2.0.0",
     "postcss-loader": "2.0.9",
     "pretty-bytes": "4.0.2",
